@@ -1,0 +1,92 @@
+import React from "react";
+import Slider from "react-slick";
+import style from "../styles/homescreen.module.scss";
+import { Search, Download, PlayBtn, StarFill, ClockFill } from "react-bootstrap-icons";
+
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
+
+const HomeScreen = () => {
+    const carouselDate = [
+        {id: 1, title: "Velocix", body: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum"},
+        {id: 2, title: "Velocix", body: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum"},
+        {id: 3, title: "Velocix", body: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum"},
+    ];
+    const cards = [
+      { id:1, title: "CDN", body: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.", icon: <Download />},
+      { id:2, title: "VXOA", body: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",icon: <PlayBtn />},
+      { id:3, title: "VPP", body: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.", icon: <StarFill />},
+      { id:4, title: "VRM", body: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.", icon: <ClockFill />},
+    ]
+
+    const settings = {
+    //   dots: true,
+      arrows: false,
+      infinite: true,
+      autoplay:true,
+      speed: 500,
+    //   slidesToShow: 1,
+      slidesToScroll: 1,
+      responsive: [
+        {
+          breakpoint: 991.98,
+          settings: {
+            slidesToShow: 1,
+            slidesToScroll: 1,
+          },
+        },
+      ],
+    };
+    return(
+        <div className={style.homeScreen}>
+            <div className={style.wrapper}>
+                <div className={style.sliderWrapper}>
+                    <Slider {...settings}>
+                    {carouselDate.map(data => ( 
+                        <div className={style.cContent} key={data.id}>
+                            <h3 className={style.panelHead}>{data.title}</h3>
+                            <p>{data.body}</p>
+                        </div>
+                    )) }
+                    </Slider>
+                </div>
+                
+            </div>
+            {/* Doc grey container */}
+            <div className={style.docContainer}>
+              <div className={style.container}>
+                <div>
+                  <h1>Documentation</h1>
+                  <p>Everything you need to get your software documentation online.</p>
+                </div>
+                <div className={style.inputWrapper}>
+                  <input placeholder="Search docs here..."/>
+                  <Search />
+                </div>
+                {/* <i className="bi bi-search"></i> */}
+              </div>
+            </div>
+
+            {/* Cards */}
+            <div className={style.cardWrapper}>
+                <div className={style.container}>
+                    {cards.map((data => {
+                      return (
+                        <div key={data.id} className={style.card}>
+                          <div className={style.cardHead}>
+                            <span className={style.iconWrapper}>
+                              {data.icon}
+                            </span>
+                            <span>{data.title}</span>
+                          </div>
+                          <p>{data.body}</p>
+                        </div>
+                      )
+                    }))}
+                </div>
+            </div>
+        </div>
+    )
+};
+
+export default HomeScreen;

@@ -1,0 +1,59 @@
+@import "../../styles/mixins.module.scss";
+@import "../../styles/variables.module.scss";
+
+.container {
+    min-height: 80px;
+    margin-top: auto;
+    font-family: "poppins-medium";
+    position: fixed;
+    top:0;
+    left:0;
+    width:100%;
+    z-index:20;
+    @include flex($jc: space-between, $ai: center, $fw: wrap);
+    background-color: $header_color;
+
+    .wrapper{
+        margin: 0px 10px 0px 10px;
+        border:1px solid black;
+        padding:10px;
+        @include flex($jc: space-between, $ai: center, $fw: wrap);
+        flex:1;
+    }
+
+    .logoWrapper{
+        margin-right: 20px;
+        @include flex($ai: center, $gp: 10px);
+
+        .brandLogo{
+            color: $white_color;
+            letter-spacing: 5px;
+            font-family: "poppins-medium";
+            font-weight: bolder;
+            font-size: 1.2rem;
+        }
+    }
+
+    .navItems{
+        list-style: none;
+        @include flex( $jc: space-between, $ai: center, $fw: wrap);
+
+        & > li {
+            margin: 0px 10px 0px 10px;
+            font-size: 1rem;
+        }
+
+        & > li > a {
+            display: inline-block;
+            padding:10px;
+            text-decoration: none;
+            color: $white_color;
+            transition: all 1s ease-in;
+            border-radius: 2px;
+        }
+
+        & > li > a:hover {
+            outline: 1px solid $white_color;
+        }
+    }
+}

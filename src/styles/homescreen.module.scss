@@ -1,0 +1,122 @@
+@import "../styles/mixins.module.scss";
+@import "../styles/variables.module.scss";
+
+.homeScreen{
+    margin-top:60px;
+}
+.wrapper{
+    padding:40px 10px;
+    background-color: $carousel_color;
+
+    .sliderWrapper{
+        width:80%;
+        margin: auto;
+    }
+
+    .cContent{
+        padding:0px 20px;
+        text-align: center;
+        font-family: "poppins-medium";
+
+        .panelHead{
+            font-size: 3rem;
+            font-family: "poppins-regular";
+            margin-bottom: 30px;
+        }
+
+        & > p{
+            line-height: 1.7;
+            color: #fff;
+        }
+    }
+}
+
+.docContainer{
+    // border:1px solid red;
+    // margin-top: 30px;
+    font-family: "poppins-regular";
+    padding: 10px;
+    background-color: $grey_color;
+    // @include flex();
+
+    .container {
+        padding:10px;
+        line-height: 1.8;
+        @include flex( $gp:10px, $fw: wrap);
+
+        & > div:first-child {
+            flex: 2;
+        }
+    }
+    .inputWrapper{
+        flex:1;
+        // border:1px solid red;
+        @include flex($ai: center);
+        position: relative;
+
+        & > input {
+            width:100%;
+            padding:10px;
+            border-radius: 50px;
+            outline:none;
+            border:none;
+        }
+
+        & > svg {
+            position:absolute;
+            right:10px;
+            top:50%;
+            transform:translate(-10px, -50%);
+        }
+    }
+}
+
+.cardWrapper{
+    // border:1px solid black;
+    padding: 10px;
+    font-family: "poppins-regular";
+
+    .container{
+        padding:10px;
+        width:90%;
+        margin:auto;
+        @include flex($fw: wrap, $jc: center, $ai:center, $gp: 10px);
+        @media screen and (max-width: 767px) {
+            display: block;
+        }
+
+    }
+    .card {
+        padding:10px;
+        margin-bottom: 10px;
+        border:1px solid $dark_grey;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: all 1s ease;
+        box-shadow:0 0.125rem 0.25rem rgba(0,0,0,0.075);
+        flex: 1 0 33%;
+        max-width:350px;
+
+        @media screen and (max-width: 767px) {
+            max-width: none;
+        }
+
+        .cardHead{
+            @include flex($ai:center, $gp:10px);
+            transition: all 1s ease;
+            margin-bottom: 10px;
+            font-weight: bold;
+
+            & > span:first-child {
+                border:2px solid $grey_color;
+                border-radius: 3px;
+                display: inline-block;
+                padding:10px;
+            }
+        }
+
+        &:hover .cardHead span:first-child {
+            border:2px solid $violet_color;
+        }
+    }
+}

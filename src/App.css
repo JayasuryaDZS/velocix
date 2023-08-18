@@ -1,0 +1,13 @@
+.root-container {
+  min-height:100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+main{
+  flex: 1;
+  max-width: 1920px;
+  /* border: 1px solid black; */
+  margin: auto;
+  width:100%;
+}
