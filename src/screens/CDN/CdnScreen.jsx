@@ -1,7 +1,7 @@
 import React from "react";
 import Sidebar from "../../components/Sidebar/Sidebar";
 
-const CdnScreen = () => {
+const Dashboard = () => {
   return (
     <div className="container">
       <div className="row">
@@ -14,4 +14,4 @@ const CdnScreen = () => {
   );
 };
 
-export default CdnScreen;
+export default Dashboard;

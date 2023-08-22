@@ -1,1 +1,1 @@
-export { default as CdnScreen } from "./CdnScreen";
+export { default as Dashboard } from "./CdnScreen";
