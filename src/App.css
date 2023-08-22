@@ -10,4 +10,9 @@ main{
   /* border: 1px solid black; */
   margin: auto;
   width:100%;
+  padding-top: 80px;
+}
+.card-title a{
+text-decoration: none;
+color:rgb(85, 26, 139)
 }
