@@ -14,7 +14,7 @@ import "./styles/global.module.scss";
 import App from "./App.jsx";
 import HomeScreen from "./screens/HomeScreen";
 import ErrorPage from "./screens/errorPage.jsx";
-import { Dashboard } from "./screens/CDN";
+import { Dashboard } from "./screens/dashboard";
 
 const router = createBrowserRouter(
   createRoutesFromElements(

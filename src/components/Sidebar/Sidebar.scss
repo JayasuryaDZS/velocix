@@ -65,7 +65,8 @@
     position: fixed;
     z-index: 10;
     top: 82px;
-    height: calc(100% - 126px);
+    // height: calc(100% - 126px);
+    height:100%;
     background: #fff;
     overflow-y: auto;
     scrollbar-color: rgba(0,0,0,0.2) #f5f5f5;
@@ -119,7 +120,9 @@
     
     .sidebarMenu{
         display: block;
-        color:#181720
+        color:#181720;
+        position: relative;
+        top: 80px;
     }
     .docs-sidebar{
 

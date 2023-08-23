@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { useParams } from 'react-router-dom';
 import "./Sidebar.scss";
 import {
   List,
@@ -8,8 +9,16 @@ import {
   X,
   XLg,
 } from "react-bootstrap-icons";
-const Sidebar = () => {
+
+import { Loader } from "../Spinner";
+// import { productAndRelease } from "../../api";
+
+const Sidebar = (props) => {
   const [toggle, setToggle] = useState(false);
+  // const [sidebarList, setSidebarList] = useState([]);
+  const params = useParams();
+ 
+
   return (
     <>
       <div className="sidebarMenu">
@@ -21,6 +30,9 @@ const Sidebar = () => {
         id="docs-sidebar"
         className={`docs-sidebar sidebar-visible ${toggle ? "show" : ""}`}
       >
+        <span onClick={() => setToggle(false)} className="close-sidebar">
+          <XLg />
+        </span>
         <nav id="docs-nav" className="docs-nav navbar">
           <ul className="section-items list-unstyled nav flex-column pb-3">
             <li className="nav-item section-title active">
@@ -30,39 +42,10 @@ const Sidebar = () => {
                 </span>
                 Introduction
               </a>
-              <span onClick={() => setToggle(false)} className="close-sidebar">
-                <XLg />
-              </span>
             </li>
-
             <li className="nav-item">
               <a className="nav-link scrollto" href="#item-1-1">
                 Section Item 1.1
-              </a>
-            </li>
-            <li className="nav-item">
-              <a className="nav-link scrollto" href="#item-1-2">
-                Section Item 1.2
-              </a>
-            </li>
-            <li className="nav-item">
-              <a className="nav-link scrollto" href="#item-1-3">
-                Section Item 1.3
-              </a>
-            </li>
-            <li className="nav-item">
-              <a className="nav-link scrollto" href="#item-1-4">
-                Section Item 1.4
-              </a>
-            </li>
-            <li className="nav-item">
-              <a className="nav-link scrollto" href="#item-1-5">
-                Section Item 1.5
-              </a>
-            </li>
-            <li className="nav-item">
-              <a className="nav-link scrollto" href="#item-1-6">
-                Section Item 1.6
               </a>
             </li>
           </ul>

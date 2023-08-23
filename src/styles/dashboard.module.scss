@@ -1,0 +1,65 @@
+@import "../styles/mixins.module.scss";
+@import "../styles/variables.module.scss";
+
+.container{
+    // border:1px solid red;
+    font-family:"poppins-regular" ;
+    padding:10px 30px;
+
+    @media screen and (min-width: 980px) {
+        position:relative;
+        left: 300px;
+        width:calc(100% - 300px);
+    }
+
+    .heroWrapper{
+        padding:10px;
+        min-height:80vh;
+        // border:1px solid black;
+        // border:1px solid $grey_color;
+
+        .content{
+            
+            & > .inputWrapper {
+                position: relative;
+                width:fit-content;
+
+                input{
+                    padding:10px;
+                    margin:10px 0px;
+                    font-size: 1.2rem;
+                    border:1px solid #b0abab;
+                    outline:none;
+                }
+                svg{
+                    // border:1px solid black;
+                    position:absolute;
+                    right:10px;
+                    top:50%;
+                    transform:translateY(-50%)
+                }
+            }
+        }
+
+        & > div > button {
+            padding: 8px 20px;
+            cursor: pointer;
+            background-color: $carousel_color;
+            color:#fff;
+            outline:none;
+            border:none;
+            border-radius: 3px;
+        }
+    }
+
+    .cardWrapper{
+        border:1px solid black;
+        margin-top:10px;
+
+        .togHead{
+            @include flex($jc: space-between, $ai: center);
+            padding:10px;
+            border:1px solid $grey_color;
+        }
+    }
+}

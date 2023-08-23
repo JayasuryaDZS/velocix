@@ -1,10 +1,13 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import { List } from "react-bootstrap-icons";
+import { useNavigate } from "react-router-dom";
+
 import logo from "../../assets/icons/logo.svg";
 import style from "./Header.module.scss";
-import { List } from "react-bootstrap-icons";
 
 const Header = () => {
+  const navigate = useNavigate();
   const [toggle, setToggle] = useState(false);
   const navItems = [
     { id: 1, menu: "Home", route: "" },
@@ -25,7 +28,7 @@ const Header = () => {
     <div className={style.container}>
       <div className={style.wrapper}>
         {/** Logo Container */}
-        <div className={style.logoWrapper}>
+        <div className={style.logoWrapper} onClick={()=> navigate("/")}>
           <div className={style.imgContainer}>
             <img src={logo} alt="brand-logo" />
           </div>
