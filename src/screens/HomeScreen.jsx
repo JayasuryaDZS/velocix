@@ -129,6 +129,20 @@ const HomeScreen = () => {
           })}
         </div>
       </div>
+
+      <div className={style.sHero}>
+          <div className={style.sWrapper}>
+            <h2>Launch Your Software Project Like a Pro</h2>
+            <p className={style.text}>
+              <span>Want to launch your software project and start getting traction from your target users? Check out</span>
+              <span>our premium Bootstrap 5 startup template CoderPro! It has everything you need to promote your</span>
+              <span>product.</span>
+            </p>
+            <div className={style.btnWrapper}>
+              <button>Get CoderPro</button>
+            </div>
+          </div>
+      </div>
     </div>
   );
 };

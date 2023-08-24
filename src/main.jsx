@@ -18,10 +18,12 @@ import { CdnScreen } from "./screens/CDN";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
-    <Route path="/" element={<App />} errorElement={<ErrorPage />}>
-      <Route path="/" index={true} element={<HomeScreen />}></Route>
+    <>
+      <Route path="/" element={<App />} errorElement={<ErrorPage />}>
+        <Route path="/" index={true} element={<HomeScreen />}></Route>
+      </Route>
       <Route path="/cdn" index={true} element={<CdnScreen />}></Route>
-    </Route>
+     </>
   )
 );
 

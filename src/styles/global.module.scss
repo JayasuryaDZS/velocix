@@ -1,3 +1,11 @@
+
+* {
+    padding: 0;
+    margin:0;
+    box-sizing: border-box;
+    scroll-behavior: smooth;
+}
+
 @font-face {
     font-family: "poppins-elight";
     font-display: swap;
@@ -14,9 +22,4 @@
     font-family: "poppins-medium";
     font-display: swap;
     src: url("/src/assets/fonts/Poppins-Medium.ttf");
-}
-* {
-    padding: 0;
-    margin:0;
-    box-sizing: border-box;
 }
