@@ -11,9 +11,10 @@ import {
 
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const HomeScreen = () => {
+  const navigate = useNavigate();
   const carouselDate = [
     {
       id: 1,
@@ -44,21 +45,21 @@ const HomeScreen = () => {
       title: "VXOA",
       body: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
       icon: <PlayBtn />,
-      links: "/vxoa",
+      links: "/cdn",
     },
     {
       id: 3,
       title: "VPP",
       body: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
       icon: <StarFill />,
-      links: "/vpp",
+      links: "/cdn",
     },
     {
       id: 4,
       title: "VRM",
       body: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
       icon: <ClockFill />,
-      links: "/vrm",
+      links: "/cdn",
     },
   ];
 
@@ -116,7 +117,7 @@ const HomeScreen = () => {
         <div className={style.container}>
           {cards.map((data) => {
             return (
-              <div key={data.id} className={style.card}>
+              <div key={data.id} className={style.card} onClick={()=> navigate(data.links)}>
                 <div className={style.cardHead}>
                   <span className={style.iconWrapper}>{data.icon}</span>
                   <span className="card-title">

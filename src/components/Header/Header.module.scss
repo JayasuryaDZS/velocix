@@ -23,6 +23,7 @@
 
     .logoWrapper{
         margin-right: 20px;
+        cursor: pointer;
         @include flex($ai: center, $gp: 10px);
 
         .imgContainer {
