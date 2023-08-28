@@ -51,13 +51,12 @@
     .inputWrapper{
         flex:1;
         // border:1px solid red;
-        min-width: 300px;
         @include flex($ai: center);
         position: relative;
 
         & > input {
             width:100%;
-            padding:10px 20px;
+            padding:10px;
             border-radius: 50px;
             outline:none;
             border:none;
@@ -78,9 +77,8 @@
     font-family: "poppins-regular";
 
     .container{
-        padding:80px 10px;
+        padding:10px;
         // width:90%;
-        // border:1px solid black;
         margin:auto;
         @include flex($fw: wrap, $jc: center, $ai:center, $gp: 10px);
         @media screen and (max-width: 767px) {
@@ -89,23 +87,19 @@
 
     }
     .card {
-        padding:10px;
+        padding:20px;
         margin-bottom: 10px;
         border:1px solid $dark_grey;
         border-radius: 5px;
         cursor: pointer;
-        transition: all .5s ease;
-        // box-shadow:0 0.125rem 0.25rem rgba(0,0,0,0.075);
+        transition: all 1s ease;
+        box-shadow:0 0.125rem 0.25rem rgba(0,0,0,0.075);
         flex: 1 0 33%;
         max-width:350px;
 
         &:hover {
-            box-shadow: 10px 10px 10px rgba(0,0,0,0.3);
+            box-shadow: 10px 10px 30px rgba(0,0,0,0.3);
         }
-
-        // &:not(:last-child) {
-        //     margin-bottom: 10px;
-        // }
 
         @media screen and (max-width: 767px) {
             max-width: none;
@@ -130,7 +124,6 @@
         }
     }
 }
-
 .sHero{
     font-family: "poppins-regular";
     background-color: $carousel_color;

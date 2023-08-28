@@ -18,10 +18,12 @@ import { Dashboard } from "./screens/dashboard";
 
 const router = createBrowserRouter(
   createRoutesFromElements(
-    <Route path="/" element={<App />} errorElement={<ErrorPage />}>
-      <Route path="/" index={true} element={<HomeScreen />}></Route>
-      <Route path="/details/:id" index={true} element={<Dashboard />}></Route>
-    </Route>
+    <>
+      <Route path="/" element={<App />} errorElement={<ErrorPage />}>
+        <Route path="/" index={true} element={<HomeScreen />}></Route>
+      </Route>
+      <Route path="/cdn" index={true} element={<Dashboard />}></Route>
+     </>
   )
 );
 

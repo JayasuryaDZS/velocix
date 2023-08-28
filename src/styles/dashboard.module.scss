@@ -1,65 +1,58 @@
 @import "../styles/mixins.module.scss";
 @import "../styles/variables.module.scss";
 
-.container{
-    // border:1px solid red;
-    font-family:"poppins-regular" ;
-    padding:10px 30px;
-
-    @media screen and (min-width: 980px) {
-        position:relative;
-        left: 300px;
-        width:calc(100% - 300px);
-    }
-
-    .heroWrapper{
-        padding:10px;
-        min-height:80vh;
+.wrapper {
+    // border:2px solid red;
+    min-height:100vh;
+    position:relative;
+    top:60px;
+    
+    .main__wrapper{
+        margin:auto;
         // border:1px solid black;
-        // border:1px solid $grey_color;
-
-        .content{
-            
-            & > .inputWrapper {
-                position: relative;
-                width:fit-content;
-
-                input{
-                    padding:10px;
-                    margin:10px 0px;
-                    font-size: 1.2rem;
-                    border:1px solid #b0abab;
-                    outline:none;
-                }
-                svg{
-                    // border:1px solid black;
-                    position:absolute;
-                    right:10px;
-                    top:50%;
-                    transform:translateY(-50%)
-                }
-            }
+        // height:300px;
+        min-height:100vh;
+        font-family: "poppins-regular";
+        
+        @media screen and (min-width:980px) {
+            position:absolute;
+            width: calc(100% - 300px);
+            left:300px;
         }
 
-        & > div > button {
-            padding: 8px 20px;
-            cursor: pointer;
-            background-color: $carousel_color;
-            color:#fff;
-            outline:none;
-            border:none;
-            border-radius: 3px;
-        }
+        
     }
+}
+.contentSection{
+    max-width:1300px;
+    padding: 2rem;
+    margin: auto;
 
-    .cardWrapper{
-        border:1px solid black;
-        margin-top:10px;
+    .intoSec {
+        // border:2px solid green;
+        margin-bottom: 32px;
+        h1{
+            font-size: 2.7rem;
+        }
+        .smapleText{
+            margin-top: 32px;
+        }
 
-        .togHead{
-            @include flex($jc: space-between, $ai: center);
+        h4{
+            margin-top: 10px;
+            letter-spacing: .5px;
+        }
+
+        .githubCode{
+            height:300px;
+            margin:32px 0px;
             padding:10px;
             border:1px solid $grey_color;
+            border-radius: 10px;
+        }
+
+        .text{
+            margin:10px 0px;
         }
     }
 }

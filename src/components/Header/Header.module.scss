@@ -2,7 +2,7 @@
 @import "../../styles/variables.module.scss";
 
 .container {
-    min-height: 80px;
+    min-height: 60px;
     margin-top: auto;
     font-family: "poppins-medium";
     position: fixed;
@@ -26,6 +26,9 @@
         cursor: pointer;
         @include flex($ai: center, $gp: 10px);
 
+        .imgContainer {
+            @include flex($ai: center);
+        }
         .brandLogo{
             color: $white_color;
             letter-spacing: 5px;
@@ -86,4 +89,3 @@
         left: 0;
     }
 }
-

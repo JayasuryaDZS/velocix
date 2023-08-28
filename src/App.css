@@ -2,7 +2,6 @@
   min-height:100vh;
   display: flex;
   flex-direction: column;
-  position:relative;
 }
 
 main{
@@ -11,7 +10,7 @@ main{
   /* border: 1px solid black; */
   margin: auto;
   width:100%;
-  padding-top: 80px;
+  padding-top: 60px;
 }
 .card-title a{
 text-decoration: none;

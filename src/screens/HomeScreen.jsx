@@ -8,11 +8,10 @@ import {
   StarFill,
   ClockFill,
 } from "react-bootstrap-icons";
-import { useNavigate } from "react-router-dom";
 
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-// import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const HomeScreen = () => {
   const navigate = useNavigate();
@@ -39,28 +38,28 @@ const HomeScreen = () => {
       title: "CDN",
       body: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
       icon: <Download />,
-      links: "details/cdn",
+      links: "/cdn",
     },
     {
       id: 2,
       title: "VXOA",
       body: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
       icon: <PlayBtn />,
-      links: "details/vxoa",
+      links: "/cdn",
     },
     {
       id: 3,
       title: "VPP",
       body: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
       icon: <StarFill />,
-      links: "details/vpp",
+      links: "/cdn",
     },
     {
       id: 4,
       title: "VRM",
       body: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
       icon: <ClockFill />,
-      links: "details/vrm",
+      links: "/cdn",
     },
   ];
 
@@ -121,8 +120,8 @@ const HomeScreen = () => {
               <div key={data.id} className={style.card} onClick={()=> navigate(data.links)}>
                 <div className={style.cardHead}>
                   <span className={style.iconWrapper}>{data.icon}</span>
-                  <span className="card-title" >
-                    {data.title}
+                  <span className="card-title">
+                    <Link to={data.links}>{data.title}</Link>
                   </span>
                 </div>
                 <p>{data.body}</p>
@@ -132,7 +131,6 @@ const HomeScreen = () => {
         </div>
       </div>
 
-      {/* Sample Hero */}
       <div className={style.sHero}>
           <div className={style.sWrapper}>
             <h2>Launch Your Software Project Like a Pro</h2>
