@@ -1,4 +1,4 @@
-import React from "react";
+import { useEffect } from "react";
 import Slider from "react-slick";
 import style from "../styles/homescreen.module.scss";
 import {
@@ -12,8 +12,22 @@ import {
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { Link, useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  GET_ALL_DOCUMENTS_BY_RELEASE_ID,
+  GET_ALL_PRODUCTS,
+  GET_PRODUCT_BY_ID,
+} from "../store/actionTypes";
 
 const HomeScreen = () => {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch({ type: GET_ALL_PRODUCTS });
+  }, []);
+
+  const products = useSelector((state) => state?.products?.products);
+
   const navigate = useNavigate();
   const carouselDate = [
     {
@@ -81,6 +95,19 @@ const HomeScreen = () => {
       },
     ],
   };
+
+  const navigateToLatestRelease = (data, latestRelease) => {
+    navigate(
+      `/${data.attributes.title.toLowerCase()}/${
+        data.id
+      }/${latestRelease.attributes.title.toLowerCase()}/${latestRelease.id}`
+    );
+    dispatch({ type: GET_PRODUCT_BY_ID, payload: data.id });
+    dispatch({
+      type: GET_ALL_DOCUMENTS_BY_RELEASE_ID,
+      payload: latestRelease.id,
+    });
+  };
   return (
     <div className={style.homeScreen}>
       <div className={style.wrapper}>
@@ -115,34 +142,57 @@ const HomeScreen = () => {
       {/* Cards */}
       <div className={style.cardWrapper}>
         <div className={style.container}>
-          {cards.map((data) => {
-            return (
-              <div key={data.id} className={style.card} onClick={()=> navigate(data.links)}>
-                <div className={style.cardHead}>
-                  <span className={style.iconWrapper}>{data.icon}</span>
-                  <span className="card-title">
-                    <Link to={data.links}>{data.title}</Link>
-                  </span>
+          {products.length > 0 &&
+            products.map((data, index) => {
+              const latestRelease = data?.attributes?.releases?.data[0];
+              return (
+                <div
+                  key={index}
+                  className={style.card}
+                  // create dispatch for selected Product
+                  onClick={() => {
+                    navigateToLatestRelease(data, latestRelease);
+                  }}
+                >
+                  <div className={style.cardHead}>
+                    <span className={style.iconWrapper}>
+                      <Download />
+                    </span>
+                    <span className="card-title">
+                      <Link
+                        to={`/${data.attributes.title.toLowerCase()}/${
+                          data.id
+                        }`}
+                      >
+                        {data.attributes.title}
+                      </Link>
+                    </span>
+                  </div>
+                  <p>{data.attributes?.description}</p>
                 </div>
-                <p>{data.body}</p>
-              </div>
-            );
-          })}
+              );
+            })}
         </div>
       </div>
 
       <div className={style.sHero}>
-          <div className={style.sWrapper}>
-            <h2>Launch Your Software Project Like a Pro</h2>
-            <p className={style.text}>
-              <span>Want to launch your software project and start getting traction from your target users? Check out</span>
-              <span>our premium Bootstrap 5 startup template CoderPro! It has everything you need to promote your</span>
-              <span>product.</span>
-            </p>
-            <div className={style.btnWrapper}>
-              <button>Get CoderPro</button>
-            </div>
+        <div className={style.sWrapper}>
+          <h2>Launch Your Software Project Like a Pro</h2>
+          <p className={style.text}>
+            <span>
+              Want to launch your software project and start getting traction
+              from your target users? Check out
+            </span>
+            <span>
+              our premium Bootstrap 5 startup template CoderPro! It has
+              everything you need to promote your
+            </span>
+            <span>product.</span>
+          </p>
+          <div className={style.btnWrapper}>
+            <button>Get CoderPro</button>
           </div>
+        </div>
       </div>
     </div>
   );

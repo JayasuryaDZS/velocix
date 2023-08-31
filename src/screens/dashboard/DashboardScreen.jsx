@@ -1,13 +1,34 @@
 import React, { useState, useEffect } from "react";
 
-import style from '../../styles/dashboard.module.scss';
+import style from "../../styles/dashboard.module.scss";
 import Sidebar from "../../components/Sidebar/Sidebar";
 import Header from "../../components/Header";
 
+import { useDispatch, useSelector } from "react-redux";
+
+import {
+  GET_ALL_DOCUMENTS_BY_RELEASE_ID,
+  GET_ALL_PRODUCTS,
+  GET_PRODUCT_BY_ID,
+} from "../../store/actionTypes";
+import { useNavigate, useParams } from "react-router-dom";
+import { API_ENDPOINT } from "../../api";
 const DashBoard = () => {
   const [activeState, setActiveState] = useState("introduction");
+  const dispatch = useDispatch();
+
+  const navigate = useNavigate();
+  const params = useParams();
+
+  console.log({ params }, "dashboard");
 
   useEffect(() => {
+    dispatch({ type: GET_ALL_PRODUCTS });
+    dispatch({
+      type: GET_ALL_DOCUMENTS_BY_RELEASE_ID,
+      payload: params.releaseId,
+    });
+
     const scrollCheck = (e) => {
       // let currentSection = "introduction";
 
@@ -19,102 +40,111 @@ const DashBoard = () => {
           setActiveState(sectionEl.id);
         }
       });
-    }
+    };
 
     window.addEventListener("scroll", scrollCheck);
 
-    return (() => {
+    return () => {
       window.removeEventListener("scroll", scrollCheck);
-    })
-  },[])
+    };
+  }, []);
+
+  const releases = useSelector((state) => state?.releases?.release) || [];
+  const category = releases?.attributes?.category || [];
 
   return (
     <div className={style.wrapper}>
       <Header />
       <div className="container">
         <div className={style.rowContainer}>
-            <Sidebar activeState={activeState}/>
-            <div className={style.main__wrapper}>
-              <div className={style.contentSection}>
-
-
-                <section id="introduction" className={style.intoSec}>
-                  <h1>Introduction</h1>
-                  <p className={style.smapleText}>Section intro goes here. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque finibus condimentum nisl id vulputate. Praesent aliquet varius eros interdum suscipit. Donec eu purus sed nibh convallis bibendum quis vitae turpis. Duis vestibulum diam lorem, vitae dapibus nibh facilisis a. Fusce in malesuada odio.</p>
-
-                  <h4>Github Code Example:</h4>
-                  <span className={style.text}>You can embed your code snippets using Github gists</span>
-
-                  <div className={style.githubCode}>
-                    <span>Github:</span>
-                  </div>
-
-                  <h4>Highlight.js Example:</h4>
-                  <span className={style.text}>You can embed your code snippets using highlight.js It supports 185 languages and 89 styles.</span>
-
-                  <div className={style.githubCode}>
-                    <span>Github:</span>
-                  </div>
-                </section>
-
-                <section id="section1.1" className={style.intoSec}>
-                  <h1>Section 1.1</h1>
-                  <p className={style.smapleText}>Section intro goes here. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque finibus condimentum nisl id vulputate. Praesent aliquet varius eros interdum suscipit. Donec eu purus sed nibh convallis bibendum quis vitae turpis. Duis vestibulum diam lorem, vitae dapibus nibh facilisis a. Fusce in malesuada odio.</p>
-
-                  <h4>Github Code Example:</h4>
-                  <span className={style.text}>You can embed your code snippets using Github gists</span>
-
-                  <div className={style.githubCode}>
-                    <span>Github:</span>
-                  </div>
-
-                  <h4>Highlight.js Example:</h4>
-                  <span className={style.text}>You can embed your code snippets using highlight.js It supports 185 languages and 89 styles.</span>
-
-                  <div className={style.githubCode}>
-                    <span>Github:</span>
-                  </div>
-                </section>
-
-                <section id="section1.2" className={style.intoSec}>
-                  <h1>Section 1.2</h1>
-                  <p className={style.smapleText}>Section intro goes here. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque finibus condimentum nisl id vulputate. Praesent aliquet varius eros interdum suscipit. Donec eu purus sed nibh convallis bibendum quis vitae turpis. Duis vestibulum diam lorem, vitae dapibus nibh facilisis a. Fusce in malesuada odio.</p>
-
-                  <h4>Github Code Example:</h4>
-                  <span className={style.text}>You can embed your code snippets using Github gists</span>
-
-                  <div className={style.githubCode}>
-                    <span>Github:</span>
-                  </div>
-
-                  <h4>Highlight.js Example:</h4>
-                  <span className={style.text}>You can embed your code snippets using highlight.js It supports 185 languages and 89 styles.</span>
-
-                  <div className={style.githubCode}>
-                    <span>Github:</span>
-                  </div>
-                </section>
-                <section id="vxon" className={style.intoSec}>
-                  <h1>VXON</h1>
-                  <p className={style.smapleText}>Section intro goes here. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque finibus condimentum nisl id vulputate. Praesent aliquet varius eros interdum suscipit. Donec eu purus sed nibh convallis bibendum quis vitae turpis. Duis vestibulum diam lorem, vitae dapibus nibh facilisis a. Fusce in malesuada odio.</p>
-
-                  <h4>Github Code Example:</h4>
-                  <span className={style.text}>You can embed your code snippets using Github gists</span>
-
-                  <div className={style.githubCode}>
-                    <span>Github:</span>
-                  </div>
-
-                  <h4>Highlight.js Example:</h4>
-                  <span className={style.text}>You can embed your code snippets using highlight.js It supports 185 languages and 89 styles.</span>
-
-                  <div className={style.githubCode}>
-                    <span>Github:</span>
-                  </div>
-                </section>
-
-              </div>
+          <Sidebar activeState={activeState} />
+          <div className={style.main__wrapper}>
+            <div className={style.contentSection}>
+              <section id="introduction" className={style.intoSec}>
+                <h1>{releases?.attributes?.title}</h1>
+                {category.length > 0 &&
+                  category.map((item) => {
+                    return (
+                      <>
+                        {" "}
+                        <h2>
+                          {" "}
+                          <span style={{ color: "red" }}>Category:</span>{" "}
+                          {item.category_name}
+                        </h2>{" "}
+                        <br />
+                        {item.subCategory.length > 0
+                          ? item.subCategory.map((data) => {
+                              return (
+                                <>
+                                  {" "}
+                                  <h3>
+                                    <span style={{ color: "red" }}>
+                                      Sub Category:
+                                    </span>{" "}
+                                    {data.subCategoryTitle}
+                                  </h3>{" "}
+                                  {data.doc.map((docs) => {
+                                    return (
+                                      <>
+                                        <li>
+                                          {" "}
+                                          <span style={{ color: "blue" }}>
+                                            Docs:
+                                          </span>{" "}
+                                          {docs?.doc_title}
+                                        </li>{" "}
+                                        <br />{" "}
+                                      </>
+                                    );
+                                  })}
+                                </>
+                              );
+                            })
+                          : item.categoryDocs.map((docs) => {
+                              return (
+                                <>
+                                  <li>
+                                    {" "}
+                                    <span style={{ color: "red" }}>
+                                      Docs:
+                                    </span>{" "}
+                                    <span
+                                      onClick={() => {
+                                        // console.log({ docs });
+                                        navigate(
+                                          `/${params.product}/${params.productId}/${params.release}/${params.releaseId}/document`,
+                                          { state: docs }
+                                        );
+                                      }}
+                                    >
+                                      {docs?.doc_title}
+                                    </span>{" "}
+                                    <span>
+                                      {docs?.renderPdf
+                                        ? "render pdf"
+                                        : "render content"}
+                                    </span>{" "}
+                                    {docs?.pdfLink && (
+                                      <a
+                                        href={`${API_ENDPOINT}${docs.pdfLink}`}
+                                        target="_blank"
+                                        rel="noreferrer"
+                                      >
+                                        PDF Link
+                                      </a>
+                                    )}
+                                  </li>{" "}
+                                  <br />{" "}
+                                </>
+                              );
+                            })}
+                      </>
+                    );
+                  })}
+              </section>
             </div>
+          </div>
         </div>
       </div>
     </div>
