@@ -39,11 +39,11 @@ const Header = () => {
         </span>
 
         {/** Nav Items */}
-        <ul className={`${style.navItems} ${toggle ? style.show : ""} `}>
+        {/* <ul className={`${style.navItems} ${toggle ? style.show : ""} `}>
           {navItems.map((data) => (
             <NavItems key={data.id} {...data} />
           ))}
-        </ul>
+        </ul> */}
       </div>
     </div>
   );

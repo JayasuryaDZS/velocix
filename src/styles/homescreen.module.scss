@@ -75,14 +75,108 @@
     // border:1px solid black;
     padding: 10px;
     font-family: "poppins-regular";
+    position: relative;
+    overflow: hidden;
+    min-height:400px;
+
+    .heading {
+        font-size: 3rem;
+        text-align: center;
+        padding:20px 0px;
+        z-index:11;
+        position:relative;
+    }
+    .line{
+        width:70%;
+        margin:auto;
+        border:1.5px solid $line_color;
+        border-radius: 10px;
+    }
+    .bubbleOne{
+        position: absolute;
+        z-index: 10;
+        height: 500px;
+        width: 500px;
+        // border:1px solid black;
+        border-radius: 50%;
+        top: -240px;
+        left:-270px;
+        background-color: $parent_bubble1;
+
+        &::after{
+            content: "";
+            position:absolute;
+            top:485px;
+            left:430px;
+            height:40px;
+            width:40px;
+            border-radius: 50%;
+            background-color: $child_bubble;
+        }
+    }
+
+    .bubbleTwo{
+        position:absolute;
+        height:580px;
+        width:430px;
+        border-radius: 50%;
+        background-color: $parent_bubble2;
+        top:0;
+        right:-275px;
+        z-index:10;
+
+        &::before{
+            content: "";
+            position:absolute;
+            top:10px;
+            left:0;
+            height:40px;
+            width:40px;
+            background-color: $child_bubble;
+            border-radius: 50%;
+        }
+    }
 
     .container{
         padding:10px;
+        // border:2px solid black;
+        width:80%;
+        margin: 100px auto;
+        z-index: 15;
+        position:relative;
+        // border:1px solid red;
         // width:90%;
-        margin:auto;
-        @include flex($fw: wrap, $jc: center, $ai:center, $gp: 10px);
-        @media screen and (max-width: 767px) {
-            display: block;
+        // margin:auto;
+        @include flex( $gp: 15px, $fw: wrap, $jc:center);
+        // @media screen and (max-width: 767px) {
+        //     display: block;
+        // }
+        & > .sCard{
+            padding:10px;
+            @include flex( $dir: column, $ai:center);
+            flex-basis: 230px;
+            box-shadow: 5px 10px 10px rgba(0,0,0,0.3);
+            border-radius: 10px;
+            text-align: center;
+            gap:20px;
+            transition:all .2s ease;
+            cursor: pointer;
+
+            &:hover {
+                box-shadow: 5px 10px 5px rgba(0,0,0,0.1);
+                outline:3px solid $common_violet;
+            }
+
+            & > span{
+                font-weight: bolder;
+                color: $common_violet;
+            }
+        }
+
+        .box{
+            width:80px;
+            height:80px;
+            background-color: #D9D9D9;
         }
 
     }
