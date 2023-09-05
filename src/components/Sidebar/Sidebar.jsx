@@ -1,10 +1,12 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import "./Sidebar.scss";
 import {
   List,
   Signpost,
   Signpost2,
   ArrowDown,
+  ChevronRight,
   Signpost2Fill,
   Box2,
   Tools,
@@ -12,118 +14,93 @@ import {
   XLg,
 } from "react-bootstrap-icons";
 const Sidebar = (props) => {
+  const [sideBarMenu, setSideBarMenu] = useState("")
+  const [subSideBarMenu, setSubSideBarMenu] = useState("")
   const { activeState } = props;
   console.log(activeState, "CHecking the active state 14 -->");
-  const [toggle, setToggle] = useState(false);
+  const [toggle, setToggle] = useState(true);
+
+  const sideBarDropDown = (menu)=>{
+    if(sideBarMenu === ""){
+      setSideBarMenu(menu)
+    }else if(sideBarMenu === menu){
+       setSideBarMenu("")
+    }else{
+      setSideBarMenu(menu)
+    }
+  }
+
+  const subSideBarDropDown = (subMenu)=>{
+    if(subSideBarMenu === ""){
+      setSubSideBarMenu(subMenu)
+    }else if(subSideBarMenu === subMenu){
+      setSubSideBarMenu("")
+    }else{
+      setSubSideBarMenu(subMenu)
+    }
+  }
+
   return (
     <div>
-      <div className="sidebarMenu">
-        <span className="menuIcon" onClick={() => setToggle(true)}>
-          <List />
-        </span>
-      </div>
+      
       <div
         id="docs-sidebar"
         className={`docs-sidebar sidebar-visible ${toggle ? "show" : ""}`}
       >
-        <nav id="docs-nav" className="docs-nav navbar">
+        <nav id="docs-nav" className="docs-nav ">
           <ul className="section-items list-unstyled nav flex-column pb-3">
-            <li className={ `nav-item section-title ${ activeState === "introduction" ? "active" : "" }` }>
-              <a className="nav-link scrollto active" href="#introduction">
-                <span className="theme-icon-holder me-2">
-                  <Signpost2Fill />
-                </span>
-                Introduction
-              </a>
-              <span onClick={() => setToggle(false)} className="close-sidebar">
-                <XLg />
+            <li className={ `nav-item section-title ${ activeState === "" ? "active" : "" }` }>
+              <Link className="nav-link scrollto active" to="#">
+              Overview
+              </Link>
+              <span onClick={() => setToggle(!toggle)} className="close-sidebar">
+              <List />
               </span>
+             
             </li>
-
-            <li className={`nav-item ${activeState === "section1.1" ? "active" : ""}`}>
-              <a className="nav-link scrollto" href="#section1.1">
-                Section Item 1.1
-              </a>
-            </li>
-            <li className={`nav-item ${activeState === "section1.2" ? "active" : ""}`}>
-              <a className="nav-link scrollto" href="#item-1-2">
-                Section Item 1.2
-              </a>
-            </li>
-            {/* <li className="nav-item">
-              <a className="nav-link scrollto" href="#item-1-3">
-                Section Item 1.3
-              </a>
-            </li>
-            <li className="nav-item">
-              <a className="nav-link scrollto" href="#item-1-4">
-                Section Item 1.4
-              </a>
-            </li>
-            <li className="nav-item">
-              <a className="nav-link scrollto" href="#item-1-5">
-                Section Item 1.5
-              </a>
-            </li>
-            <li className="nav-item">
-              <a className="nav-link scrollto" href="#item-1-6">
-                Section Item 1.6
-              </a>
-            </li> */}
-            <li className={ `nav-item section-title ${activeState === "vxon" ? "active" : ""}`}>
-              <a className="nav-link scrollto active" href="#vxon">
-                <span className="theme-icon-holder me-2">
-                  <ArrowDown />
-                </span>
-                VXON
-              </a>
-            </li>
-            <li className="nav-item">
-              <a className="nav-link scrollto" href="#item-1-5">
-                Section Item 2.1
-              </a>
-            </li>
-            <li className="nav-item">
-              <a className="nav-link scrollto" href="#item-1-6">
-                Section Item 2.2
-              </a>
-            </li>
-            <li className={ `nav-item section-title `}>
-              <a className="nav-link scrollto active" href="#introduction">
-                <span className="theme-icon-holder me-2">
-                  <Box2 />
-                </span>
-                Introduction
-              </a>
-            </li>
-            <li className="nav-item">
-              <a className="nav-link scrollto" href="#item-1-5">
-                Section Item 2.1
-              </a>
-            </li>
-            <li className="nav-item">
-              <a className="nav-link scrollto" href="#item-1-6">
-                Section Item 2.2
-              </a>
-            </li>
-            <li className={ `nav-item section-title `}>
-              <a className="nav-link scrollto active" href="#introduction">
-                <span className="theme-icon-holder me-2">
-                  <Tools />
-                </span>
-                Introduction
-              </a>
-            </li>
-            <li className="nav-item">
-              <a className="nav-link scrollto" href="#item-1-5">
-                Section Item 2.1
-              </a>
-            </li>
-            <li className="nav-item">
-              <a className="nav-link scrollto" href="#item-1-6">
-                Section Item 2.2
-              </a>
-            </li>
+              <li>
+                <Link className="nav-link" to="/cdn" onClick={()=>{sideBarDropDown('Get started')}} >
+                <ChevronRight className="arrow-icon" />  Get started
+                </Link>
+               { sideBarMenu === "Get started" &&  <ul className="sub-menu">
+                  <li>   <Link className="nav-link" to="/cdn/getStarted/general?menu=getStarted&submenu=general">
+                  General
+                </Link></li>
+                <li>   <Link className="nav-link" to="#">
+                Account checklist
+                </Link></li>
+                <li>   <Link className="nav-link" to="#">
+                Add funds to your balance
+                </Link></li>
+                </ul>}
+              </li>
+              <li>
+                <Link className="nav-link" to="#" onClick={()=>{sideBarDropDown("About Stripe payments")}}>
+                <ChevronRight className="arrow-icon" /> About Stripe payments
+                </Link>
+                { sideBarMenu === "About Stripe payments" && <ul className="sub-menu">
+                  <li>   <Link className="nav-link" to="#">
+                  Online payments
+                </Link></li>
+                <li>   <Link className="nav-link" to="#">
+                Recurring payments
+                </Link>
+                
+                </li>
+                <li>   <Link className="nav-link" to="#" onClick={()=>{subSideBarDropDown("Currency conversions")}}>
+                <ChevronRight  className="arrow-icon"/> Currencies
+                </Link>
+             { subSideBarMenu === "Currency conversions" &&   <ul className="sub-menu inner-sub-menu">
+                  <li>   <Link className="nav-link" to="#">
+                  Currency conversions
+                </Link></li>
+               
+               
+                </ul>}
+                </li>
+                </ul>}
+              </li>
+             
           </ul>
         </nav>
       </div>

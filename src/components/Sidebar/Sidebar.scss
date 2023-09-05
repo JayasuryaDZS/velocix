@@ -26,7 +26,6 @@
   .docs-nav .nav-link {
     display: inline-block;
     position: relative;
-    padding: 0.5rem 1rem;
     color: #5d6778;
   }
   .nav-link {
@@ -97,12 +96,12 @@
     border-radius: 0.5rem;
   }
 
-  .sidebarMenu{
-    display: none;
-}
-.close-sidebar{
-  display: none;
-}
+//   .sidebarMenu{
+//     display: none;
+// }
+// .close-sidebar{
+//   display: none;
+// }
 .docs-nav .nav-item.active .nav-link {
   color: #28b76b;
 }
@@ -128,34 +127,84 @@
 .me-2 {
   margin-right: 0.5rem !important;
 }
+
+.sidebarMenu{
+  display: block;
+  color:#181720;
+  margin:1rem;
+}
+.docs-sidebar{
+
+  left: -260px;
+ 
+  transition: all 0.5s ease 0s;
+  li{
+      width: 100%;
+  }
+}
+.docs-sidebar.show{
+  left: 0;
+}
+.close-sidebar{
+display: block;
+float:right;
+margin: 8px 10px 0px 0px;
+
+}
 @media(max-width:980px) {
     
-    .sidebarMenu{
-        display: block;
-        color:#181720
-    }
-    .docs-sidebar{
-
-        left: -300px;
-       
-        transition: all 0.5s ease 0s;
-        li{
-            width: 100%;
-        }
-    }
-    .docs-sidebar.show{
-        left: 0;
-    }
-    .close-sidebar{
-      display: block;
-      float:right;
-      margin: 8px 10px 0px 0px;
-  
-    }
+   
     .menuIcon{
     margin: 9px 0px 0px 9px;
     font-size: 24px;
     display: inline-block;
     cursor: pointer;
     }
+}
+
+
+// sidebar css latest
+
+
+#docs-sidebar  nav li a svg{
+  width: 10px;
+  height: auto;
+}
+#docs-sidebar ul{
+  margin-left: 10px;
+  padding: 0;
+}
+#docs-nav .list-unstyled{
+  padding-left: 25px;
+}
+#docs-sidebar  a{
+  padding-left: 0;
+  padding-right: 0;
+  font-family: 'poppins-regular';
+}
+#docs-sidebar  a:hover{
+ color: #000;
+}
+#docs-sidebar .sub-menu {
+  list-style-type: none;
+}
+#docs-sidebar .sub-menu li a{
+  padding-bottom: 0;
+  font-size: 14px;
+}
+#docs-sidebar .sub-menu li:last-child a{
+  padding-bottom: 8px;
+}
+#docs-sidebar .sub-menu li:first-child a{
+  padding-top: 0px;
+}
+
+#docs-sidebar li{
+  position: relative;
+}
+#docs-sidebar .arrow-icon {
+  position: absolute;
+  left: -12px;
+  top: 50%;
+  transform: translateY(-50%);
 }

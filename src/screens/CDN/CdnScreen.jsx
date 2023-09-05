@@ -3,6 +3,7 @@ import React, { useState, useEffect } from "react";
 import style from '../../styles/dashboard.module.scss';
 import Sidebar from "../../components/Sidebar/Sidebar";
 import Header from "../../components/Header";
+import BreadCrumb from "../../components/Breadcrumb";
 
 const CdnScreen = () => {
   const [activeState, setActiveState] = useState("introduction");
@@ -30,14 +31,16 @@ const CdnScreen = () => {
 
   return (
     <div className={style.wrapper}>
-      <Header />
+      {/* <Header /> */}
       <div className="container">
-        <div className={style.rowContainer}>
+        {/* <div className={style.rowContainer}>
             <Sidebar activeState={activeState}/>
             <div className={style.main__wrapper}>
               <div className={style.contentSection}>
 
-
+             
+              <BreadCrumb /> */}
+              
                 <section id="introduction" className={style.intoSec}>
                   <h1>Introduction</h1>
                   <p className={style.smapleText}>Section intro goes here. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque finibus condimentum nisl id vulputate. Praesent aliquet varius eros interdum suscipit. Donec eu purus sed nibh convallis bibendum quis vitae turpis. Duis vestibulum diam lorem, vitae dapibus nibh facilisis a. Fusce in malesuada odio.</p>
@@ -115,9 +118,9 @@ const CdnScreen = () => {
 
               </div>
             </div>
-        </div>
-      </div>
-    </div>
+    //     </div>
+    //   </div>
+    // </div>
   );
 };
 
