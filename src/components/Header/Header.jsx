@@ -1,9 +1,10 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import { List } from "react-bootstrap-icons";
+import { useNavigate } from "react-router-dom";
+
 import logo from "../../assets/icons/logo.svg";
 import style from "./Header.module.scss";
-import { useNavigate } from "react-router-dom";
-import { List } from "react-bootstrap-icons";
 
 const Header = () => {
   const navigate = useNavigate();
@@ -27,22 +28,22 @@ const Header = () => {
     <div className={style.container}>
       <div className={style.wrapper}>
         {/** Logo Container */}
-        <div className={style.logoWrapper} onClick={()=> navigate("/")}>
+        <div className={style.logoWrapper} onClick={() => navigate("/")}>
           <div className={style.imgContainer}>
             <img src={logo} alt="brand-logo" />
           </div>
-          <span className={style.brandLogo} >Velocix</span>
+          <span className={style.brandLogo}>Velocix</span>
         </div>
         <span onClick={() => setToggle(!toggle)} className={style.mobileMenu}>
           <List />
         </span>
 
         {/** Nav Items */}
-        <ul className={`${style.navItems} ${toggle ? style.show : ""} `}>
+        {/* <ul className={`${style.navItems} ${toggle ? style.show : ""} `}>
           {navItems.map((data) => (
             <NavItems key={data.id} {...data} />
           ))}
-        </ul>
+        </ul> */}
       </div>
     </div>
   );

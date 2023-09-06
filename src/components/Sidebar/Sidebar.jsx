@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import "./Sidebar.scss";
 import {
@@ -13,13 +13,25 @@ import {
   X,
   XLg,
 } from "react-bootstrap-icons";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  GET_ALL_PRODUCTS,
+  GET_ALL_RELEASES_BY_ID,
+} from "../../store/actionTypes";
 const Sidebar = (props) => {
+  const dispatch = useDispatch();
+  const products = useSelector((state) => state?.products?.products);
+  const category = useSelector((state) => state?.releases?.category);
+
   const [sideBarMenu, setSideBarMenu] = useState("");
   const [subSideBarMenu, setSubSideBarMenu] = useState("");
   const { activeState } = props;
-  console.log(activeState, "CHecking the active state 14 -->");
+
   const [toggle, setToggle] = useState(true);
 
+  useEffect(() => {
+    dispatch({ type: GET_ALL_PRODUCTS });
+  }, []);
   const sideBarDropDown = (menu) => {
     if (sideBarMenu === "") {
       setSideBarMenu(menu);
@@ -30,7 +42,11 @@ const Sidebar = (props) => {
     }
   };
 
-  const subSideBarDropDown = (subMenu) => {
+  const subSideBarDropDown = (subMenu, id) => {
+    dispatch({
+      type: GET_ALL_RELEASES_BY_ID,
+      payload: id,
+    });
     if (subSideBarMenu === "") {
       setSubSideBarMenu(subMenu);
     } else if (subSideBarMenu === subMenu) {
@@ -63,7 +79,73 @@ const Sidebar = (props) => {
                 <List />
               </span>
             </li>
-            <li>
+            {products.map((item) => {
+              return (
+                <li>
+                  <Link
+                    className="nav-link"
+                    to="/cdn/getStarted"
+                    onClick={() => {
+                      sideBarDropDown(item.attributes.title);
+                    }}
+                  >
+                    <ChevronRight className="arrow-icon" />{" "}
+                    {item?.attributes?.title}
+                  </Link>
+                  {sideBarMenu === item.attributes.title && (
+                    <ul className="sub-menu">
+                      {item.attributes.releases.data.map((elem) => {
+                        return (
+                          <li>
+                            {" "}
+                            <Link
+                              className="nav-link"
+                              to="/cdn/getStarted/general"
+                              onClick={() => {
+                                subSideBarDropDown(
+                                  elem.attributes.title,
+                                  elem.id
+                                );
+                              }}
+                            >
+                              {elem.attributes.title}
+                            </Link>
+                            {subSideBarMenu === elem.attributes.title && (
+                              <ul className="sub-menu">
+                                {category.attributes.category.map(
+                                  (categories) => {
+                                    return <li>{categories.category_name}</li>;
+                                  }
+                                )}
+                              </ul>
+                            )}
+                          </li>
+                        );
+                      })}
+                      {/* <li>
+                        {" "}
+                        <Link className="nav-link" to="/cdn/getStarted/general">
+                          General
+                        </Link>
+                      </li>
+                      <li>
+                        {" "}
+                        <Link className="nav-link" to="#">
+                          Account checklist
+                        </Link>
+                      </li>
+                      <li>
+                        {" "}
+                        <Link className="nav-link" to="#">
+                          Add funds to your balance
+                        </Link>
+                      </li> */}
+                    </ul>
+                  )}
+                </li>
+              );
+            })}
+            {/* <li>
               <Link
                 className="nav-link"
                 to="/cdn/getStarted"
@@ -144,7 +226,7 @@ const Sidebar = (props) => {
                   </li>
                 </ul>
               )}
-            </li>
+            </li> */}
           </ul>
         </nav>
       </div>

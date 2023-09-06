@@ -1,4 +1,4 @@
-import React from "react";
+import { useEffect } from "react";
 import Slider from "react-slick";
 import style from "../styles/homescreen.module.scss";
 import {
@@ -12,8 +12,22 @@ import {
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { Link, useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  GET_ALL_DOCUMENTS_BY_RELEASE_ID,
+  GET_ALL_PRODUCTS,
+  GET_PRODUCT_BY_ID,
+} from "../store/actionTypes";
 
 const HomeScreen = () => {
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch({ type: GET_ALL_PRODUCTS });
+  }, []);
+
+  const products = useSelector((state) => state?.products?.products);
+
   const navigate = useNavigate();
   const carouselDate = [
     {
@@ -36,28 +50,41 @@ const HomeScreen = () => {
     {
       id: 1,
       title: "CDN",
-      body: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
+      body: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry standard dummy text ever since the 1500s,",
       icon: <Download />,
       links: "/cdn",
     },
     {
       id: 2,
       title: "VXOA",
-      body: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
-      icon: <PlayBtn />,
+      body: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry standard dummy text ever since the 1500s,",
       links: "/cdn",
     },
     {
       id: 3,
       title: "VPP",
-      body: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
+      body: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry standard dummy text ever since the 1500s,",
       icon: <StarFill />,
       links: "/cdn",
     },
     {
       id: 4,
       title: "VRM",
-      body: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
+      body: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry standard dummy text ever since the 1500s,",
+      icon: <ClockFill />,
+      links: "/cdn",
+    },
+    {
+      id: 5,
+      title: "VXAA",
+      body: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry standard dummy text ever since the 1500s,",
+      icon: <ClockFill />,
+      links: "/cdn",
+    },
+    {
+      id: 6,
+      title: "VPP",
+      body: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry standard dummy text ever since the 1500s,",
       icon: <ClockFill />,
       links: "/cdn",
     },
@@ -81,6 +108,19 @@ const HomeScreen = () => {
       },
     ],
   };
+
+  const navigateToLatestRelease = (data, latestRelease) => {
+    navigate(
+      `/${data.attributes.title.toLowerCase()}/${
+        data.id
+      }/${latestRelease.attributes.title.toLowerCase()}/${latestRelease.id}`
+    );
+    dispatch({ type: GET_PRODUCT_BY_ID, payload: data.id });
+    dispatch({
+      type: GET_ALL_DOCUMENTS_BY_RELEASE_ID,
+      payload: latestRelease.id,
+    });
+  };
   return (
     <div className={style.homeScreen}>
       <div className={style.wrapper}>
@@ -95,54 +135,50 @@ const HomeScreen = () => {
           </Slider>
         </div>
       </div>
-      {/* Doc grey container */}
-      <div className={style.docContainer}>
-        <div className={style.container}>
-          <div>
-            <h1>Documentation</h1>
-            <p>
-              Everything you need to get your software documentation online.
-            </p>
-          </div>
-          <div className={style.inputWrapper}>
-            <input placeholder="Search docs here..." />
-            <Search />
-          </div>
-          {/* <i className="bi bi-search"></i> */}
-        </div>
-      </div>
 
       {/* Cards */}
       <div className={style.cardWrapper}>
+        <h1 className={style.heading}>Welcome to Velocix</h1>
+        <hr className={style.line} />
+        <span className={style.bubbleOne}></span>
+        <span className={style.bubbleTwo}></span>
         <div className={style.container}>
-          {cards.map((data) => {
-            return (
-              <div key={data.id} className={style.card} onClick={()=> navigate(data.links)}>
-                <div className={style.cardHead}>
-                  <span className={style.iconWrapper}>{data.icon}</span>
-                  <span className="card-title">
-                    <Link to={data.links}>{data.title}</Link>
-                  </span>
+          {cards.length > 0 &&
+            cards.map((data, index) => {
+              // const latestRelease = data?.attributes?.releases?.data[0];
+              return (
+                <div
+                  key={index}
+                  className={style.sCard}
+                  onClick={() => navigate("/cdn")}
+                >
+                  <div className={style.box}></div>
+                  <p>{data.body}</p>
+                  <span>{data.title}</span>
                 </div>
-                <p>{data.body}</p>
-              </div>
-            );
-          })}
+              );
+            })}
         </div>
       </div>
 
       <div className={style.sHero}>
-          <div className={style.sWrapper}>
-            <h2>Launch Your Software Project Like a Pro</h2>
-            <p className={style.text}>
-              <span>Want to launch your software project and start getting traction from your target users? Check out</span>
-              <span>our premium Bootstrap 5 startup template CoderPro! It has everything you need to promote your</span>
-              <span>product.</span>
-            </p>
-            <div className={style.btnWrapper}>
-              <button>Get CoderPro</button>
-            </div>
+        <div className={style.sWrapper}>
+          <h2>Launch Your Software Project Like a Pro</h2>
+          <p className={style.text}>
+            <span>
+              Want to launch your software project and start getting traction
+              from your target users? Check out
+            </span>
+            <span>
+              our premium Bootstrap 5 startup template CoderPro! It has
+              everything you need to promote your
+            </span>
+            <span>product.</span>
+          </p>
+          <div className={style.btnWrapper}>
+            <button>Get CoderPro</button>
           </div>
+        </div>
       </div>
     </div>
   );
