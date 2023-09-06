@@ -1,27 +1,23 @@
 import React, { useEffect } from "react";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
-const BreadCrumb = ({ pathname }) => {
+const BreadCrumb = () => {
 
   const location = useLocation()
-  const navigate = useNavigate()
+  let menu = location.pathname.split('/')
 
-  const url = new URLSearchParams(window.location.search)
-  const menu = url.get("menu")
-  const submenu = url.get("submenu")
+  menu.splice(0,1)
 
+   let url = ""
   return (
     <nav aria-label="breadcrumb">
       <ol className="breadcrumb">
-        <li className="breadcrumb-item">
-          <Link to="/">Home</Link>
+      { menu && menu.map((item)=>{
+          url += "/"+item
+          return     <li className="breadcrumb-item">
+          <Link to={url}>{item}</Link>
         </li>
-    { menu &&    <li onClick={()=> navigate(`/cdn/getStarted?menu=${menu}`)} className="breadcrumb-item active" aria-current="page" >
-          {menu}
-        </li>}
-       {submenu && <li className="breadcrumb-item active" aria-current="page">
-          {submenu}
-        </li>}
+        })}
       </ol>
     </nav>   
   );
