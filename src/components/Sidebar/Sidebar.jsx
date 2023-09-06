@@ -59,7 +59,7 @@ const Sidebar = (props) => {
              
             </li>
               <li>
-                <Link className="nav-link" to="/cdn" onClick={()=>{sideBarDropDown('Get started')}} >
+                <Link className="nav-link" to="/cdn/getStarted?menu=getStarted" onClick={()=>{sideBarDropDown('Get started')}} >
                 <ChevronRight className="arrow-icon" />  Get started
                 </Link>
                { sideBarMenu === "Get started" &&  <ul className="sub-menu">

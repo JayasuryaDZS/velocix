@@ -28,7 +28,7 @@ const router = createBrowserRouter(
       </Route>
       <Route path="/cdn"  element={<CdnLayout />}>
       <Route path="/cdn/"  element={<CdnScreen />}></Route>
-      {/* <Route path="/cdn/getStarted"  element={<GetStarted />}> */}
+      <Route path="/cdn/getStarted"  element={<GetStarted />}/>
       <Route path="/cdn/getStarted/general"  element={<General />}></Route>
       {/* </Route> */}
       </Route>
