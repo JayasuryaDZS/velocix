@@ -1,11 +1,18 @@
 import { put, takeEvery } from "redux-saga/effects";
 
 // release Redux States
-import { GET_ALL_DOCUMENTS_BY_RELEASE_ID } from "./actionTypes";
+import {
+  GET_ALL_DOCUMENTS_BY_RELEASE_ID,
+  GET_ALL_RELEASES_BY_ID,
+} from "./actionTypes";
 
-import { getDocsByReleaseId, getDocsByReleaseIdFailure } from "./ReleaseSlice";
+import {
+  getDocsByReleaseId,
+  getDocsByReleaseIdFailure,
+  getCategoryByReleaseId,
+} from "./ReleaseSlice";
 
-import { getAllDocsByReleaseId } from "../api";
+import { getAllDocsByReleaseId, getReleasesWithID } from "../api";
 
 function* fetchDocsByReleasesId(action) {
   try {
@@ -17,6 +24,17 @@ function* fetchDocsByReleasesId(action) {
   }
 }
 
+function* getAllCategoryReleasedById(action) {
+  try {
+    const response = yield getReleasesWithID(action.payload);
+
+    yield put(getCategoryByReleaseId(response?.data.data));
+  } catch (error) {
+    yield put(getDocsByReleaseIdFailure(error));
+    console.error(error);
+  }
+}
 export default function* releaseSaga() {
   yield takeEvery(GET_ALL_DOCUMENTS_BY_RELEASE_ID, fetchDocsByReleasesId);
+  yield takeEvery(GET_ALL_RELEASES_BY_ID, getAllCategoryReleasedById);
 }

@@ -2,6 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const INIT_STATE = {
   releases: [],
+  category: {},
   release: {},
   loader: true,
   error: null,
@@ -23,9 +24,18 @@ export const releaseSlice = createSlice({
       state.error = action.payload;
       return state;
     },
+    getCategoryByReleaseId: (state, action) => {
+      state.category = action.payload;
+      state.loader = false;
+      return state;
+    },
   },
 });
 
-export const { getDocsByReleaseId , getDocsByReleaseIdFailure} = releaseSlice.actions;
+export const {
+  getDocsByReleaseId,
+  getDocsByReleaseIdFailure,
+  getCategoryByReleaseId,
+} = releaseSlice.actions;
 
 export default releaseSlice.reducer;

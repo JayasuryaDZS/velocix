@@ -3,6 +3,7 @@ import React, { useState, useEffect } from "react";
 import { useLocation, useParams } from "react-router-dom";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
+import pdf2base64 from "pdf-to-base64";
 
 import rehypeRaw from "rehype-raw";
 import Header from "../../components/Header";
@@ -20,11 +21,22 @@ import {
 
 const Document = () => {
   const [activeState, setActiveState] = useState("introduction");
+  const [base64Data, setBase64Data] = useState("");
   const location = useLocation();
   const dispatch = useDispatch();
 
   const params = useParams();
   const document = get(location, "state", {});
+
+  //Fucntion Convert PDF path url to base64 string:
+  const urlToBlob = async() => {
+    await pdf2base64(`${API_ENDPOINT}${document.pdfLink}`).then((response) =>{
+      let base64Str = "data:application/pdf;base64,"+response;
+      setBase64Data(base64Str);
+    }).catch(err =>{
+      console.log(err, 'Checking the error');
+    })
+  }
 
   useEffect(() => {
     dispatch({ type: GET_ALL_PRODUCTS });
@@ -32,9 +44,8 @@ const Document = () => {
       type: GET_ALL_DOCUMENTS_BY_RELEASE_ID,
       payload: params.releaseId,
     });
+    urlToBlob();
   }, []);
-
-  console.log({ params, document });
 
   return (
     <div className={style.wrapper}>
@@ -55,9 +66,9 @@ const Document = () => {
                 </a>
               </div>
               {document.renderPdf ? (
-                <section>
+                <section style={{height:"700px"}}>
                   <h4>PDF Render screen</h4>
-                  
+                   { base64Data && <object data={base64Data} type="application/pdf" width="100%" height="100%"></object> }
                 </section>
               ) : (
                 <section>

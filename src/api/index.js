@@ -16,6 +16,10 @@ export const getProductById = async (id) =>
 export const getAllReleasesWithCategories = async () =>
   await axios.get(`${API_ENDPOINT}/api/releases?populate=*`, config);
 
+//Api which return subcategories and documents:
+export const getAllData = async () => 
+  await axios.get(`${API_ENDPOINT}/api/releases?populate[1]=category&populate[2]=category.subCategory&populate[3]=category.subCategory.doc&populate[4]=category.categoryDocs`, config)
+
 export const getReleasesWithID = async (id) =>
   await axios.get(`${API_ENDPOINT}/api/releases/${id}?populate=*`, config);
 

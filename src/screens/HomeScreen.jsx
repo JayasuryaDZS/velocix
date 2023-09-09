@@ -50,28 +50,41 @@ const HomeScreen = () => {
     {
       id: 1,
       title: "CDN",
-      body: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
+      body: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry standard dummy text ever since the 1500s,",
       icon: <Download />,
       links: "/cdn",
     },
     {
       id: 2,
       title: "VXOA",
-      body: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
-      icon: <PlayBtn />,
+      body: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry standard dummy text ever since the 1500s,",
       links: "/cdn",
     },
     {
       id: 3,
       title: "VPP",
-      body: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
+      body: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry standard dummy text ever since the 1500s,",
       icon: <StarFill />,
       links: "/cdn",
     },
     {
       id: 4,
       title: "VRM",
-      body: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
+      body: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry standard dummy text ever since the 1500s,",
+      icon: <ClockFill />,
+      links: "/cdn",
+    },
+    {
+      id: 5,
+      title: "VXAA",
+      body: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry standard dummy text ever since the 1500s,",
+      icon: <ClockFill />,
+      links: "/cdn",
+    },
+    {
+      id: 6,
+      title: "VPP",
+      body: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry standard dummy text ever since the 1500s,",
       icon: <ClockFill />,
       links: "/cdn",
     },
@@ -122,53 +135,26 @@ const HomeScreen = () => {
           </Slider>
         </div>
       </div>
-      {/* Doc grey container */}
-      <div className={style.docContainer}>
-        <div className={style.container}>
-          <div>
-            <h1>Documentation</h1>
-            <p>
-              Everything you need to get your software documentation online.
-            </p>
-          </div>
-          <div className={style.inputWrapper}>
-            <input placeholder="Search docs here..." />
-            <Search />
-          </div>
-          {/* <i className="bi bi-search"></i> */}
-        </div>
-      </div>
 
       {/* Cards */}
       <div className={style.cardWrapper}>
+        <h1 className={style.heading}>Welcome to Velocix</h1>
+        <hr className={style.line} />
+        <span className={style.bubbleOne}></span>
+        <span className={style.bubbleTwo}></span>
         <div className={style.container}>
-          {products.length > 0 &&
-            products.map((data, index) => {
-              const latestRelease = data?.attributes?.releases?.data[0];
+          {cards.length > 0 &&
+            cards.map((data, index) => {
+              // const latestRelease = data?.attributes?.releases?.data[0];
               return (
                 <div
                   key={index}
-                  className={style.card}
-                  // create dispatch for selected Product
-                  onClick={() => {
-                    navigateToLatestRelease(data, latestRelease);
-                  }}
+                  className={style.sCard}
+                  onClick={() => navigate("/cdn")}
                 >
-                  <div className={style.cardHead}>
-                    <span className={style.iconWrapper}>
-                      <Download />
-                    </span>
-                    <span className="card-title">
-                      <Link
-                        to={`/${data.attributes.title.toLowerCase()}/${
-                          data.id
-                        }`}
-                      >
-                        {data.attributes.title}
-                      </Link>
-                    </span>
-                  </div>
-                  <p>{data.attributes?.description}</p>
+                  <div className={style.box}></div>
+                  <p>{data.body}</p>
+                  <span>{data.title}</span>
                 </div>
               );
             })}
