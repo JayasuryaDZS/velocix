@@ -24,6 +24,7 @@ import GetStarted from "./screens/GetStarted";
 import General from "./screens/General";
 import CdnLayout from "./screens/CdnLayout";
 import { Dashboard } from "./screens/dashboard/";
+import CurrentScreen from "./screens/newScreen/Current";
 const router = createBrowserRouter(
   createRoutesFromElements(
     <>
@@ -38,17 +39,7 @@ const router = createBrowserRouter(
       </Route>
 
       <Route path="/" index={true} element={<HomeScreen />}></Route>
-
-      <Route
-        path="/:product/:productId/:release/:releaseId/"
-        index={true}
-        element={<Dashboard />}
-      ></Route>
-      {/* <Route
-        path="/:product/:productId/:release/:releaseId/document"
-        index={true}
-        element={<Document />}
-      ></Route> */}
+      <Route path="/dash" element={<CurrentScreen />}></Route>
     </>
   )
 );

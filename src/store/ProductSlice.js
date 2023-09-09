@@ -6,6 +6,8 @@ const INIT_STATE = {
   loader: true,
   error: null,
   errors: [],
+
+  mainData: []
 };
 
 export const productSlice = createSlice({
@@ -22,6 +24,9 @@ export const productSlice = createSlice({
       state.loader = false;
       return state;
     },
+    getOverAllData : (state, action) => {
+      console.log(action.payload, "Checking the payload in the new response 28 saga -->");
+    },
     getAllProductFailureSlice: (state, action) => {
       state.products = [];
       state.product = {};
@@ -36,6 +41,7 @@ export const {
   getAllProductSlice,
   getAllProductFailureSlice,
   getProductByIdSlice,
+  getOverAllData
 } = productSlice.actions;
 
 export default productSlice.reducer;
