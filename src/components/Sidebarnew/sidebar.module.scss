@@ -12,7 +12,7 @@
     
     @media screen and (max-width:767px) {
         position: absolute;
-        background-color: grey;
+        // background-color: grey;
         top:65px;
         left:0;
         height:100%;
@@ -23,4 +23,33 @@
 
 .sidebarShow {
     transform: translateX(0%);
+}
+
+
+//Sidebar Item styling:
+.sidebarItem{
+    // border:1px solid #ccc;
+    padding:1rem;
+    transition:all .5s ease;
+
+    &.open {
+        & >.sidebarCont {
+            height:auto;
+        }
+    }
+
+    .sidebarTitle{
+        display: flex;
+        align-items: center;
+        svg{
+            width:1.3rem;
+            cursor: pointer;
+        }
+    }
+
+    .sidebarCont{
+        padding-top:.5rem;
+        height:0;
+        overflow: hidden;
+    }
 }

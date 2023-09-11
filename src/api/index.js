@@ -18,7 +18,7 @@ export const getAllReleasesWithCategories = async () =>
 
 //Api which return subcategories and documents:
 export const getAllData = async () => 
-  await axios.get(`${API_ENDPOINT}/api/releases?populate[1]=category&populate[2]=category.subCategory&populate[3]=category.subCategory.doc&populate[4]=category.categoryDocs`, config)
+  await axios.get(`${API_ENDPOINT}/api/products?populate[0]=releases&populate[1]=releases.category&populate[2]=releases.category.subCategory&populate[3]=releases.category.categoryDocs&populate[4]=releases.category.subCategory.doc`, config)
 
 export const getReleasesWithID = async (id) =>
   await axios.get(`${API_ENDPOINT}/api/releases/${id}?populate=*`, config);

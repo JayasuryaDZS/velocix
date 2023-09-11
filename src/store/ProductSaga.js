@@ -34,13 +34,10 @@ function* fetchProductById(action) {
 
 function* fetchAllData() {
   try {
-    const response = yield getAllProductsWithReleases();
-    const overallData = response.data.data;
-    const response1 = yield getAllData();
-    const categoryData = response1.data.data;
-    yield put(getOverAllData({overallData, categoryData}));
+    const response = yield getAllData();
+    yield put(getOverAllData(response?.data.data));
   } catch (error) {
-    
+    console.log(error, "Product Saga 40 --->");
   }
 }
 

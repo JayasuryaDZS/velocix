@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { generateArray } from "../globalservice";
 
 const INIT_STATE = {
   products: [],
@@ -25,7 +26,8 @@ export const productSlice = createSlice({
       return state;
     },
     getOverAllData : (state, action) => {
-      console.log(action.payload, "Checking the payload in the new response 28 saga -->");
+      let sidebarData = generateArray(action.payload);
+      state.mainData = sidebarData;
     },
     getAllProductFailureSlice: (state, action) => {
       state.products = [];
