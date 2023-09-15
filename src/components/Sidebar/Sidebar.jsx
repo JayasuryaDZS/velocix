@@ -12,6 +12,8 @@ import {
   Tools,
   X,
   XLg,
+  ChevronBarDown,
+  ChevronDown,
 } from "react-bootstrap-icons";
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -99,13 +101,16 @@ const Sidebar = (props) => {
                     }
                   >
                     <span className="arrow-icon">
-                      <ChevronRight className="arrow-icon" />
+                      {sideBarMenu === item?.attributes?.title ? (
+                        <ChevronDown className="arrow-icon" />
+                      ) : (
+                        <ChevronRight className="arrow-icon" />
+                      )}
                     </span>
                     {item?.attributes?.title}
                   </span>
 
-                  {(sideBarMenu === item?.attributes?.title ||
-                    sideBarMenu === "cdn 1.0") && (
+                  {sideBarMenu === item?.attributes?.title && (
                     <ul className="sub-menu">
                       {item?.attributes?.releases?.data?.map((elem, index) => {
                         return (
@@ -123,7 +128,11 @@ const Sidebar = (props) => {
                             {" "}
                             <span className="nav-link-span">
                               <span className="arrow-icon">
-                                <ChevronRight className="arrow-icon" />
+                                {subSideBarMenu === elem?.attributes?.title ? (
+                                  <ChevronDown className="arrow-icon" />
+                                ) : (
+                                  <ChevronRight className="arrow-icon" />
+                                )}
                               </span>
                               {elem?.attributes?.title}
                             </span>

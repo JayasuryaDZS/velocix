@@ -19,9 +19,12 @@
       width: calc(100% - 40px);
       left: 40px;
     }
+    @media screen and (min-width: 320px) {
+      padding-left: 30px;
+    }
   }
   .main.show {
-    @media screen and (min-width: 980px) {
+    @media screen and (min-width: 320px) {
       position: absolute;
       width: calc(100% - 300px);
       left: 300px;
