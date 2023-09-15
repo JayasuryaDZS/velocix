@@ -10,7 +10,7 @@ import {
   getOverAllData
 } from "./ProductSlice";
 
-import { getAllProductsWithReleases, getProductById, getAllData } from "../api";
+import { getAllProductsWithReleases, getProductWithReleasesById, getAllData } from "../api";
 
 function* fetchProducts(action) {
   try {
@@ -24,7 +24,7 @@ function* fetchProducts(action) {
 }
 function* fetchProductById(action) {
   try {
-    const response = yield getProductById(action.payload);
+    const response = yield getProductWithReleasesById(action.payload);
     yield put(getProductByIdSlice(response?.data.data));
   } catch (error) {
     yield put(getAllProductFailureSlice(error));

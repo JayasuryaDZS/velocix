@@ -7,8 +7,17 @@ const config = {
 
 //Blogs
 
+export const getProductWithReleasesById = async (id) =>
+  await axios.get(
+    `${API_ENDPOINT}/api/products/${id}?populate[0]=releases&populate[1]=releases.category&populate[2]=releases.category.subCategory`,
+    config
+  );
+
 export const getAllProductsWithReleases = async () =>
-  await axios.get(`${API_ENDPOINT}/api/products?populate=*`, config);
+  await axios.get(
+    `${API_ENDPOINT}/api/products?populate[0]=releases&populate[1]=releases.category&populate[2]=releases.category.subCategory`,
+    config
+  );
 
 export const getProductById = async (id) =>
   await axios.get(`${API_ENDPOINT}/api/products/${id}?populate=*`, config);
@@ -17,8 +26,11 @@ export const getAllReleasesWithCategories = async () =>
   await axios.get(`${API_ENDPOINT}/api/releases?populate=*`, config);
 
 //Api which return subcategories and documents:
-export const getAllData = async () => 
-  await axios.get(`${API_ENDPOINT}/api/products?populate[0]=releases&populate[1]=releases.category&populate[2]=releases.category.subCategory&populate[3]=releases.category.categoryDocs&populate[4]=releases.category.subCategory.doc`, config)
+export const getAllData = async () =>
+  await axios.get(
+    `${API_ENDPOINT}/api/products?populate[0]=releases&populate[1]=releases.category&populate[2]=releases.category.subCategory&populate[3]=releases.category.categoryDocs&populate[4]=releases.category.subCategory.doc`,
+    config
+  );
 
 export const getReleasesWithID = async (id) =>
   await axios.get(`${API_ENDPOINT}/api/releases/${id}?populate=*`, config);

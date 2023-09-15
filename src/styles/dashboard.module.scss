@@ -5,35 +5,35 @@
     // border:2px solid red;
     min-height:100vh;
     position:relative;
-    top:60px;
-    
+    // top:60px;
+
     .main__wrapper{
         margin:auto;
         // border:1px solid black;
         // height:300px;
         min-height:100vh;
         font-family: "poppins-regular";
-        
+
         @media screen and (min-width:980px) {
             position:absolute;
             width: calc(100% - 300px);
             left:300px;
         }
 
-        
+
     }
 }
 .contentSection{
     max-width:1300px;
-    padding: 2rem;
+    padding: 1rem;
     margin: auto;
-    margin-top: 40px;
+    // margin-top: 40px;
     min-height: 100vh;
     position: relative;
-    top: 60px;
+    // top: 60px;
 
     .main__wrapper {
-        margin: auto;
+        // margin: auto;
         // border:1px solid black;
         // height:300px;
         min-height: 100vh;
@@ -51,7 +51,7 @@
 
 .contentSection {
     max-width: 1300px;
-    padding: 2rem;
+    padding: 1rem;
     margin: auto;
 
     .intoSec {
