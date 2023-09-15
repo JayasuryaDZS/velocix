@@ -86,35 +86,35 @@ const Sidebar = (props) => {
                     className="nav-link"
                     to="/cdn/getStarted"
                     onClick={() => {
-                      sideBarDropDown(item.attributes.title);
+                      sideBarDropDown(item?.attributes?.title);
                     }}
                   >
                     <ChevronRight className="arrow-icon" />{" "}
                     {item?.attributes?.title}
                   </Link>
-                  {sideBarMenu === item.attributes.title && (
+                  {sideBarMenu === item?.attributes?.title && (
                     <ul className="sub-menu">
-                      {item.attributes.releases.data.map((elem) => {
+                      {item?.attributes?.releases?.data?.map((elem) => {
                         return (
                           <li>
                             {" "}
                             <Link
                               className="nav-link"
-                              to="/cdn/getStarted/general"
+                              to="#"
                               onClick={() => {
                                 subSideBarDropDown(
-                                  elem.attributes.title,
-                                  elem.id
+                                  elem?.attributes?.title,
+                                  elem?.id
                                 );
                               }}
                             >
                               {elem.attributes.title}
                             </Link>
-                            {subSideBarMenu === elem.attributes.title && (
+                            {subSideBarMenu === elem?.attributes?.title && (
                               <ul className="sub-menu">
-                                {category.attributes.category.map(
+                                {category?.attributes?.category?.map(
                                   (categories) => {
-                                    return <li>{categories.category_name}</li>;
+                                    return <li>{categories?.category_name}</li>;
                                   }
                                 )}
                               </ul>

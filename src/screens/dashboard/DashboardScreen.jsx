@@ -20,8 +20,6 @@ const DashBoard = () => {
   const navigate = useNavigate();
   const params = useParams();
 
-  console.log({ params }, "dashboard");
-
   useEffect(() => {
     dispatch({ type: GET_ALL_PRODUCTS });
     dispatch({
