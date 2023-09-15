@@ -109,7 +109,6 @@ const DashBoard = () => {
                                     </span>{" "}
                                     <span
                                       onClick={() => {
-                                        // console.log({ docs });
                                         navigate(
                                           `/${params.product}/${params.productId}/${params.release}/${params.releaseId}/document`,
                                           { state: docs }

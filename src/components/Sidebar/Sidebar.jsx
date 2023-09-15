@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import "./Sidebar.scss";
 import {
@@ -17,6 +17,7 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   GET_ALL_PRODUCTS,
   GET_ALL_RELEASES_BY_ID,
+  GET_PRODUCT_BY_ID,
 } from "../../store/actionTypes";
 const Sidebar = (props) => {
   const dispatch = useDispatch();
@@ -25,7 +26,7 @@ const Sidebar = (props) => {
 
   const [sideBarMenu, setSideBarMenu] = useState("");
   const [subSideBarMenu, setSubSideBarMenu] = useState("");
-  const { activeState } = props;
+  const { activeState, setShowToggle, showToggle } = props;
 
   const [toggle, setToggle] = useState(true);
 
@@ -70,10 +71,13 @@ const Sidebar = (props) => {
               }`}
             >
               <Link className="nav-link scrollto active" to="#">
-                Overview
+                Products
               </Link>
               <span
-                onClick={() => setToggle(!toggle)}
+                onClick={() => {
+                  setToggle(!toggle);
+                  setShowToggle(!showToggle);
+                }}
                 className="close-sidebar"
               >
                 <List />
@@ -81,40 +85,57 @@ const Sidebar = (props) => {
             </li>
             {products.map((item) => {
               return (
-                <li>
-                  <Link
-                    className="nav-link"
-                    to="/cdn/getStarted"
-                    onClick={() => {
-                      sideBarDropDown(item?.attributes?.title);
-                    }}
+                <li
+                  key={item}
+                  className="nav-link"
+                  onClick={(e) => {
+                    sideBarDropDown(item?.attributes?.title);
+                  }}
+                >
+                  <span
+                    className="nav-link-span"
+                    onClick={() =>
+                      dispatch({ type: GET_PRODUCT_BY_ID, payload: item.id })
+                    }
                   >
-                    <ChevronRight className="arrow-icon" />{" "}
+                    <span className="arrow-icon">
+                      <ChevronRight className="arrow-icon" />
+                    </span>
                     {item?.attributes?.title}
-                  </Link>
-                  {sideBarMenu === item?.attributes?.title && (
+                  </span>
+
+                  {(sideBarMenu === item?.attributes?.title ||
+                    sideBarMenu === "cdn 1.0") && (
                     <ul className="sub-menu">
-                      {item?.attributes?.releases?.data?.map((elem) => {
+                      {item?.attributes?.releases?.data?.map((elem, index) => {
                         return (
-                          <li>
+                          <li
+                            key={index}
+                            className="nav-link"
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              subSideBarDropDown(
+                                elem?.attributes?.title,
+                                elem?.id
+                              );
+                            }}
+                          >
                             {" "}
-                            <Link
-                              className="nav-link"
-                              to="#"
-                              onClick={() => {
-                                subSideBarDropDown(
-                                  elem?.attributes?.title,
-                                  elem?.id
-                                );
-                              }}
-                            >
-                              {elem.attributes.title}
-                            </Link>
+                            <span className="nav-link-span">
+                              <span className="arrow-icon">
+                                <ChevronRight className="arrow-icon" />
+                              </span>
+                              {elem?.attributes?.title}
+                            </span>
                             {subSideBarMenu === elem?.attributes?.title && (
                               <ul className="sub-menu">
                                 {category?.attributes?.category?.map(
-                                  (categories) => {
-                                    return <li>{categories?.category_name}</li>;
+                                  (categories, index) => {
+                                    return (
+                                      <li key={index}>
+                                        {categories?.category_name}
+                                      </li>
+                                    );
                                   }
                                 )}
                               </ul>
@@ -122,111 +143,11 @@ const Sidebar = (props) => {
                           </li>
                         );
                       })}
-                      {/* <li>
-                        {" "}
-                        <Link className="nav-link" to="/cdn/getStarted/general">
-                          General
-                        </Link>
-                      </li>
-                      <li>
-                        {" "}
-                        <Link className="nav-link" to="#">
-                          Account checklist
-                        </Link>
-                      </li>
-                      <li>
-                        {" "}
-                        <Link className="nav-link" to="#">
-                          Add funds to your balance
-                        </Link>
-                      </li> */}
                     </ul>
                   )}
                 </li>
               );
             })}
-            {/* <li>
-              <Link
-                className="nav-link"
-                to="/cdn/getStarted"
-                onClick={() => {
-                  sideBarDropDown("Get started");
-                }}
-              >
-                <ChevronRight className="arrow-icon" /> Get started
-              </Link>
-              {sideBarMenu === "Get started" && (
-                <ul className="sub-menu">
-                  <li>
-                    {" "}
-                    <Link className="nav-link" to="/cdn/getStarted/general">
-                      General
-                    </Link>
-                  </li>
-                  <li>
-                    {" "}
-                    <Link className="nav-link" to="#">
-                      Account checklist
-                    </Link>
-                  </li>
-                  <li>
-                    {" "}
-                    <Link className="nav-link" to="#">
-                      Add funds to your balance
-                    </Link>
-                  </li>
-                </ul>
-              )}
-            </li>
-            <li>
-              <Link
-                className="nav-link"
-                to="#"
-                onClick={() => {
-                  sideBarDropDown("About Stripe payments");
-                }}
-              >
-                <ChevronRight className="arrow-icon" /> About Stripe payments
-              </Link>
-              {sideBarMenu === "About Stripe payments" && (
-                <ul className="sub-menu">
-                  <li>
-                    {" "}
-                    <Link className="nav-link" to="#">
-                      Online payments
-                    </Link>
-                  </li>
-                  <li>
-                    {" "}
-                    <Link className="nav-link" to="#">
-                      Recurring payments
-                    </Link>
-                  </li>
-                  <li>
-                    {" "}
-                    <Link
-                      className="nav-link"
-                      to="#"
-                      onClick={() => {
-                        subSideBarDropDown("Currency conversions");
-                      }}
-                    >
-                      <ChevronRight className="arrow-icon" /> Currencies
-                    </Link>
-                    {subSideBarMenu === "Currency conversions" && (
-                      <ul className="sub-menu inner-sub-menu">
-                        <li>
-                          {" "}
-                          <Link className="nav-link" to="#">
-                            Currency conversions
-                          </Link>
-                        </li>
-                      </ul>
-                    )}
-                  </li>
-                </ul>
-              )}
-            </li> */}
           </ul>
         </nav>
       </div>

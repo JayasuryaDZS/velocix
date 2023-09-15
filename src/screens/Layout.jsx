@@ -6,13 +6,23 @@ import BreadCrumb from "../components/Breadcrumb";
 
 const Layout = (props) => {
   const [activeState, setActiveState] = useState("introduction");
+  const [showToggle, setShowToggle] = useState(true);
+
   return (
     <div className={style.wrapper}>
       <Header />
       <div className="container">
         <div className={style.rowContainer}>
-          <Sidebar activeState={activeState} />
-          <div className={style.main__wrapper}>
+          <Sidebar
+            activeState={activeState}
+            setShowToggle={setShowToggle}
+            showToggle={showToggle}
+          />
+          <div
+            className={`${style.main__wrapper} ${
+              showToggle ? style.show : ""
+            } ${style.main}`}
+          >
             <div className={style.contentSection}>
               <BreadCrumb />
               {props.children}

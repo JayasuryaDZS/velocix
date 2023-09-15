@@ -12,12 +12,10 @@ const GetStarted = () => {
   const product = useSelector((state) => state.products.product);
   const params = useParams();
 
-  console.log({ product });
-
   useEffect(() => {
     dispatch({ type: GET_PRODUCT_BY_ID, payload: params.id });
 
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
