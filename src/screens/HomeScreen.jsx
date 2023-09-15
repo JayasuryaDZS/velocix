@@ -46,49 +46,49 @@ const HomeScreen = () => {
       body: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum",
     },
   ];
-  const cards = [
-    {
-      id: 1,
-      title: "CDN",
-      body: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry standard dummy text ever since the 1500s,",
-      icon: <Download />,
-      links: "/cdn",
-    },
-    {
-      id: 2,
-      title: "VXOA",
-      body: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry standard dummy text ever since the 1500s,",
-      links: "/cdn",
-    },
-    {
-      id: 3,
-      title: "VPP",
-      body: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry standard dummy text ever since the 1500s,",
-      icon: <StarFill />,
-      links: "/cdn",
-    },
-    {
-      id: 4,
-      title: "VRM",
-      body: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry standard dummy text ever since the 1500s,",
-      icon: <ClockFill />,
-      links: "/cdn",
-    },
-    {
-      id: 5,
-      title: "VXAA",
-      body: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry standard dummy text ever since the 1500s,",
-      icon: <ClockFill />,
-      links: "/cdn",
-    },
-    {
-      id: 6,
-      title: "VPP",
-      body: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry standard dummy text ever since the 1500s,",
-      icon: <ClockFill />,
-      links: "/cdn",
-    },
-  ];
+  // const cards = [
+  //   {
+  //     id: 1,
+  //     title: "CDN",
+  //     body: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry standard dummy text ever since the 1500s,",
+  //     icon: <Download />,
+  //     links: "/cdn",
+  //   },
+  //   {
+  //     id: 2,
+  //     title: "VXOA",
+  //     body: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry standard dummy text ever since the 1500s,",
+  //     links: "/cdn",
+  //   },
+  //   {
+  //     id: 3,
+  //     title: "VPP",
+  //     body: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry standard dummy text ever since the 1500s,",
+  //     icon: <StarFill />,
+  //     links: "/cdn",
+  //   },
+  //   {
+  //     id: 4,
+  //     title: "VRM",
+  //     body: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry standard dummy text ever since the 1500s,",
+  //     icon: <ClockFill />,
+  //     links: "/cdn",
+  //   },
+  //   {
+  //     id: 5,
+  //     title: "VXAA",
+  //     body: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry standard dummy text ever since the 1500s,",
+  //     icon: <ClockFill />,
+  //     links: "/cdn",
+  //   },
+  //   {
+  //     id: 6,
+  //     title: "VPP",
+  //     body: "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry standard dummy text ever since the 1500s,",
+  //     icon: <ClockFill />,
+  //     links: "/cdn",
+  //   },
+  // ];
 
   const settings = {
     //   dots: true,
@@ -109,33 +109,21 @@ const HomeScreen = () => {
     ],
   };
 
-  const navigateToLatestRelease = (data, latestRelease) => {
-    navigate(
-      `/${data.attributes.title.toLowerCase()}/${
-        data.id
-      }/${latestRelease.attributes.title.toLowerCase()}/${latestRelease.id}`
-    );
-    dispatch({ type: GET_PRODUCT_BY_ID, payload: data.id });
-    dispatch({
-      type: GET_ALL_DOCUMENTS_BY_RELEASE_ID,
-      payload: latestRelease.id,
-    });
-  };
+  // const navigateToLatestRelease = (data, latestRelease) => {
+  //   navigate(
+  //     `/${data.attributes.title.toLowerCase()}/${
+  //       data.id
+  //     }/${latestRelease.attributes.title.toLowerCase()}/${latestRelease.id}`
+  //   );
+  //   dispatch({ type: GET_PRODUCT_BY_ID, payload: data.id });
+  //   dispatch({
+  //     type: GET_ALL_DOCUMENTS_BY_RELEASE_ID,
+  //     payload: latestRelease.id,
+  //   });
+  // };
+
   return (
     <div className={style.homeScreen}>
-      <div className={style.wrapper}>
-        <div className={style.sliderWrapper}>
-          <Slider {...settings}>
-            {carouselDate.map((data) => (
-              <div className={style.cContent} key={data.id}>
-                <h3 className={style.panelHead}>{data.title}</h3>
-                <p>{data.body}</p>
-              </div>
-            ))}
-          </Slider>
-        </div>
-      </div>
-
       {/* Cards */}
       <div className={style.cardWrapper}>
         <h1 className={style.heading}>Welcome to Velocix</h1>
@@ -143,23 +131,45 @@ const HomeScreen = () => {
         <span className={style.bubbleOne}></span>
         <span className={style.bubbleTwo}></span>
         <div className={style.container}>
-          {cards.length > 0 &&
-            cards.map((data, index) => {
+          {products.length > 0 &&
+            products.map((data, index) => {
               // const latestRelease = data?.attributes?.releases?.data[0];
               return (
                 <div
                   key={index}
                   className={style.sCard}
-                  onClick={() => navigate("/cdn")}
+                  onClick={() => {
+                    // dispatch({ type: GET_PRODUCT_BY_ID, payload: data.id });
+                    navigate(
+                      `/${data.attributes.title.toLowerCase()}/${data.id}/overview`
+                    );
+                  }}
                 >
                   <div className={style.box}></div>
-                  <p>{data.body}</p>
-                  <span>{data.title}</span>
+                  <p>{data.attributes.description}</p>
+                  <span>{data.attributes.title}</span>
                 </div>
               );
             })}
         </div>
       </div>
+
+      <div className={style.wrapper}>
+        <div className={style.sliderWrapper}>
+          <Slider {...settings}>
+            {carouselDate.map((data) => (
+              <div className={style.cContent} key={data.id}>
+                <h3 className={style.panelHead}>{data.title}</h3>
+                <p>{data.body}</p>
+
+
+              </div>
+            ))}
+          </Slider>
+        </div>
+      </div>
+
+      <div style={{ margin: "16px" }}></div>
 
       <div className={style.sHero}>
         <div className={style.sWrapper}>

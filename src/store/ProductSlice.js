@@ -1,4 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { generateArray } from "../globalservice";
 
 const INIT_STATE = {
   products: [],
@@ -6,6 +7,8 @@ const INIT_STATE = {
   loader: true,
   error: null,
   errors: [],
+
+  mainData: []
 };
 
 export const productSlice = createSlice({
@@ -22,6 +25,10 @@ export const productSlice = createSlice({
       state.loader = false;
       return state;
     },
+    getOverAllData : (state, action) => {
+      let sidebarData = generateArray(action.payload);
+      state.mainData = sidebarData;
+    },
     getAllProductFailureSlice: (state, action) => {
       state.products = [];
       state.product = {};
@@ -36,6 +43,7 @@ export const {
   getAllProductSlice,
   getAllProductFailureSlice,
   getProductByIdSlice,
+  getOverAllData
 } = productSlice.actions;
 
 export default productSlice.reducer;

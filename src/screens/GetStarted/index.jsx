@@ -1,21 +1,37 @@
-import React, { useState } from "react";
-import style from '../../styles/dashboard.module.scss';
-import Header from "../../components/Header";
-import { Sidebar } from "../../components/Sidebar";
-import BreadCrumb from "../../components/Breadcrumb";
-import { Outlet } from "react-router-dom";
+import { useEffect } from "react";
+import Layout from "../Layout";
+import { useSelector, useDispatch } from "react-redux";
+import { GET_PRODUCT_BY_ID } from "../../store/actionTypes";
+import { useParams } from "react-router-dom";
+import ReactMarkdown from "react-markdown";
+import remarkGfm from "remark-gfm";
+import rehypeRaw from "rehype-raw";
 
 const GetStarted = () => {
-  const [activeState, setActiveState] = useState("introduction");
+  const dispatch = useDispatch();
+  const product = useSelector((state) => state.products.product);
+  const params = useParams();
+
+  console.log({ product });
+
+  useEffect(() => {
+    dispatch({ type: GET_PRODUCT_BY_ID, payload: params.id });
+
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   return (
-
     <div>
-      
-             <h1>Get started</h1>
-
-             {/* <Outlet/> */}
-
-  </div>
+      <Layout>
+        <h1>Get started</h1>
+        <ReactMarkdown
+          // eslint-disable-next-line react/no-children-prop
+          children={product?.attributes?.overview}
+          remarkPlugins={[remarkGfm]}
+          rehypePlugins={[rehypeRaw]}
+        />
+      </Layout>
+    </div>
   );
 };
 

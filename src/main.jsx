@@ -22,33 +22,24 @@ import ErrorPage from "./screens/errorPage.jsx";
 // import { CdnScreen } from "./screens/CDN";
 import GetStarted from "./screens/GetStarted";
 import General from "./screens/General";
-import CdnLayout from "./screens/CdnLayout";
+import CdnLayout from "./screens/Layout";
 import { Dashboard } from "./screens/dashboard/";
+import CurrentScreen from "./screens/newScreen/Current";
+
 const router = createBrowserRouter(
   createRoutesFromElements(
     <>
       <Route path="/" element={<App />} errorElement={<ErrorPage />}>
         <Route path="/" element={<HomeScreen />}></Route>
       </Route>
-      <Route path="/cdn" element={<CdnLayout />}>
-        {/* <Route path="/cdn/" element={<CdnScreen />}></Route> */}
-        <Route path="/cdn/getStarted" element={<GetStarted />} />
+        <Route path="/:product/:id/overview" element={<GetStarted />} > </Route>
+
+      {/* <Route path="/cdn" element={<CdnLayout />}>
         <Route path="/cdn/getStarted/general" element={<General />}></Route>
-        {/* </Route> */}
-      </Route>
+      </Route> */}
 
       <Route path="/" index={true} element={<HomeScreen />}></Route>
-
-      <Route
-        path="/:product/:productId/:release/:releaseId/"
-        index={true}
-        element={<Dashboard />}
-      ></Route>
-      {/* <Route
-        path="/:product/:productId/:release/:releaseId/document"
-        index={true}
-        element={<Document />}
-      ></Route> */}
+      <Route path="/dash" element={<CurrentScreen />}></Route>
     </>
   )
 );

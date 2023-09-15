@@ -1,0 +1,88 @@
+.container{
+    min-height:100vh;
+
+    .wrapper{
+
+        .header{
+            padding:.8rem 1.2rem;
+            display: flex;
+            align-items: center;
+            gap:1rem;
+            background-color: #000;
+            z-index:11;
+            position:sticky;
+            top:0;
+            left:0;
+            width:100%;
+
+            span{
+                font-size: 1.4rem;
+                letter-spacing: 1px;
+                font-weight: bold;
+                color:#fff;
+            }
+
+            .toggleIcons{
+                cursor: pointer;
+            }
+
+            .closeMenu{
+                display: none;
+            }
+            
+            .logoContainer{
+                flex:1;
+                display: flex;
+                align-items: center;
+                gap:1rem;
+            }
+
+            @media screen and (min-width:767px) {
+                .toggleIcons {
+                    display: none;
+                }
+            }
+        }
+
+        .sidebar{
+            width:300px;
+            position:fixed;
+            top:60px;
+            left:0;
+            overflow-y:visible;
+            height:100%;
+            background-color: #fff;
+            transition: all .5s ease;
+            box-shadow: 5px 5px 8px rgba(0,0,0,0.3);
+            z-index:10;
+            
+            @media screen and (max-width:767px) {
+                position: absolute;
+                background-color: grey;
+                top:65px;
+                left:0;
+                height:100%;
+                transform:translateX(-100%);
+                box-shadow: 5px 5px 8px rgba(0,0,0,0.3);
+            }
+        }
+
+        .main{
+            position:relative;
+            min-height:100vh;
+            font-size: 120%;
+            width: calc(100% - 300px);
+            left: 300px;
+            @media screen and (max-width:767px) {
+                width:auto;
+                left:0;
+            }
+
+            .mainContent{
+                flex:1;
+                padding:2rem;
+                min-height: calc(100% + 10vh);
+            }
+        }
+    }
+}
