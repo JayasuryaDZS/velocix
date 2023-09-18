@@ -29,14 +29,16 @@ const Document = () => {
   const document = get(location, "state", {});
 
   //Fucntion Convert PDF path url to base64 string:
-  const urlToBlob = async() => {
-    await pdf2base64(`${API_ENDPOINT}${document.pdfLink}`).then((response) =>{
-      let base64Str = "data:application/pdf;base64,"+response;
-      setBase64Data(base64Str);
-    }).catch(err =>{
-      console.log(err, 'Checking the error');
-    })
-  }
+  const urlToBlob = async () => {
+    await pdf2base64(`${API_ENDPOINT}${document.pdfLink}`)
+      .then((response) => {
+        let base64Str = "data:application/pdf;base64," + response;
+        setBase64Data(base64Str);
+      })
+      .catch((err) => {
+        // console.log(err, 'Checking the error');
+      });
+  };
 
   useEffect(() => {
     dispatch({ type: GET_ALL_PRODUCTS });
@@ -66,9 +68,16 @@ const Document = () => {
                 </a>
               </div>
               {document.renderPdf ? (
-                <section style={{height:"700px"}}>
+                <section style={{ height: "700px" }}>
                   <h4>PDF Render screen</h4>
-                   { base64Data && <object data={base64Data} type="application/pdf" width="100%" height="100%"></object> }
+                  {base64Data && (
+                    <object
+                      data={base64Data}
+                      type="application/pdf"
+                      width="100%"
+                      height="100%"
+                    ></object>
+                  )}
                 </section>
               ) : (
                 <section>
